@@ -47,7 +47,7 @@ quantidade_de_palavras = len(palavras_unicas)
 
 #abrir o arquivo nas mesma pasta que guarda o código, selecionar o modo de escrever, O encoding='utf-8' garante que caracteres especiais (ç, ã, é)
 #sejam escritos corretamente, eacessando isso com o nome de arquivo saída para organizar.
-with open('Textos_bictratados.txt', 'w', encoding='utf-8') as arquivo_saida:
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\Textos_bictratados.txt', 'w', encoding='utf-8') as arquivo_saida:
 
 #descarregar tudo do arquivo saída dentro do arquivo txt
     arquivo_saida.write(dados_limpo)
@@ -130,7 +130,7 @@ for i in range(total_textos):
     matriz_jaccard[i][i] = 1.0
 
 # Escrever a matriz em CSV com os nomes dos textos como cabeçalho e índice
-with open('matriz_jaccard.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_jaccard.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     escritor = csv.writer(arquivo_csv)
 
     # Escrever o cabeçalho
@@ -162,7 +162,7 @@ for j in range(total_textos):
             matriz_julio[i][j] = 1  # Marca a presença da palavra filtrada
 
 # Escrever a matriz no arquivo CSV
-with open('matriz_julio.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_julio.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     es = csv.writer(arquivo_csv)
 
     # Escrever o cabeçalho (primeira linha com palavras filtradas)
@@ -172,8 +172,8 @@ with open('matriz_julio.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     for i in range(len(lista_palavras_filtradas)):
         # Escrever a palavra e a linha correspondente da matriz
         es.writerow([lista_palavras_filtradas[i]] + matriz_julio[i])
-
-with open('indices_jaccard_Textos.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+print()
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\indices_jaccard_Textos.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     escritor = csv.writer(arquivo_csv)
     escritor.writerow(["source,target,weight"])  # Cabeçalho do CSV
 
@@ -186,7 +186,7 @@ with open('indices_jaccard_Textos.csv', 'w', newline='', encoding='utf-8') as ar
         
 
 print("Comparações concluídas! O arquivo 'indices_jaccard_190.csv' foi gerado.")
-with open('palavras_filtradas.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\palavras_filtradas.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     escritor = csv.writer(arquivo_csv)
     
     # Escreve o cabeçalho da tabela
