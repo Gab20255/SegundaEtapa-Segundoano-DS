@@ -1,4 +1,4 @@
-#biblioteca que remove caracteres estranhos do teXto
+#biblioteca que remove caractereaabss estranhos do teXto
 import re 
 import pandas as pd
 #Fazer contagem de valores, palavras e agrupa-las
