@@ -57,4 +57,6 @@ def questao02():
     plt.xlabel('Tempo (segundos)')
     plt.grid(True)
     plt.show()
-questao02()
+    print(V0)
+    r=-1/r
+    print(r)
