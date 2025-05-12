@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-dados01= np.loadtxt(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BANCO_DE_DADOS\ARQUIVOS\RT.dat')
-dados02= np.loadtxt(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BANCO_DE_DADOS\ARQUIVOS\capacitor01.dat')
+dados01 = np.loadtxt("RT.dat")
+dados02 = np.loadtxt("capacitor01.dat")
 def questao01():
     r= dados01[:,0]
     t= dados01[:,1]
