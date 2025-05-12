@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-dados01 = np.loadtxt("RT.dat")
-dados02 = np.loadtxt("capacitor01.dat")
+dados01 = np.loadtxt(r'BANCO_DE_DADOS\SEMANA17\Atividade01\Prova_A_Trimestral01\RT.dat')
+dados02 = np.loadtxt(r'BANCO_DE_DADOS\SEMANA17\Atividade01\Prova_A_Trimestral01\capacitor01.dat')
 def questao01():
     r= dados01[:,0]
     t= dados01[:,1]
@@ -62,11 +62,11 @@ def questao02():
     r=-1/r
     print(r)
 while(True):
-    op=input("Digte qual questão de python você quer executar? 1 OU 2?")
+    op=int(input("Digte qual questão de python você quer executar? 1 OU 2?\n"))
     if(op==1):
         questao01()
     if(op==2):
         questao02()
-    op=input("Deseja executar mais uma questão? 1 para sim e dois para não")
-    if(op==2):
+    continuar=int(input("Deseja executar mais uma questão? 1 para sim e dois para não\n"))
+    if(continuar==2):
         break
