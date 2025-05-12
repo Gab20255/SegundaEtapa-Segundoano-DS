@@ -33,3 +33,28 @@ SELECT e.Nome, pe.Populacao
 from estados e 
 JOIN PopulacaoEstados pe on pe.EstadoSigla= e.Sigla
 where pe.Populacao>10000000 
+--Questao 4
+--1
+use EmpresaC
+select pc.model, pc.speed, pc.hd
+from PC pc
+where ((cd='12x' and price<600) or (cd='24x' and price<600))
+--2
+select pc.model, pc.price, p.type
+from PC pc
+JOIN Product p on p.model = pc.model
+where maker='b'
+UNION 
+select pr.model, pr.price, p.type
+from Printer pr
+JOIN Product p on p.model = pr.model
+where maker='b'
+UNION 
+select la.model, la.price, p.type
+from Laptop la
+JOIN Product p on p.model = la.model
+where maker='b'
+--3
+select DISTINCT maker
+from Product
+where type!='Laptop'
