@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 dados01 = np.loadtxt("RT.dat")
 dados02 = np.loadtxt("capacitor01.dat")
 def questao01():
