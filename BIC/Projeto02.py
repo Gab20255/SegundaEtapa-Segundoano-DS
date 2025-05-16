@@ -29,7 +29,7 @@ palavras= texto_tratado.split()
 palavras_unicas= list(set(palavras))
 quantidade_de_palavras_unicas= len(palavras_unicas)
 #Faz com que se crie uma lista dos textos
-lista_dos_textos=texto_tratado.split('\n\n\n')
+lista_dos_textos = texto_tratado.strip().split('\n\n\n')
 contagempalavras= np.zeros(quantidade_de_palavras_unicas)
 for i in range(quantidade_de_palavras_unicas):
     for j in (lista_dos_textos):
@@ -37,7 +37,6 @@ for i in range(quantidade_de_palavras_unicas):
             contagempalavras[i]= contagempalavras[i]+1
 matriz_contagem_de_palavras_por_texto= []#matriz que armazenara as palavras filtradas
 palavras_unicas_filtradas= []
-nome_textos= []
 nova_quantidade_de_palavras_unicas=0
 for i in range(quantidade_de_palavras_unicas):
     if contagempalavras[i]>100 or contagempalavras[i]==1 or len(palavras_unicas[i])<3 or  palavras_unicas[i].isnumeric():
@@ -48,23 +47,65 @@ for i in range(quantidade_de_palavras_unicas):
         palavras_unicas_filtradas.append(palavras_unicas[i])
 nome_textos= []
 lista_textos_filtrados = []
-
 for texto in lista_dos_textos:
-    palavras = texto.split()  # quebra em palavras
-    filtradas = [p for p in palavras if p in palavras_unicas_filtradas]
-    texto_limpo = ' '.join(filtradas)
-    lista_textos_filtrados.append(texto_limpo)
-pares = itertools.combinations(range(len(lista_textos_filtrados)), 2)  # Todos os pares possíveis
-total_textos= len(lista_textos_filtrados)
-matriz_jaccard= np.zeros((total_textos, total_textos))
-pares = itertools.combinations(range(total_textos), 2)
-for i, j in pares:
+    palavras1 = texto.split()
+    if palavras1:  # Evita erro se o texto estiver vazio
+        nome_textos.append(palavras1[0])
+        filtradas = [p for p in palavras1 if p in palavras_unicas_filtradas]
+        texto_limpo = set(filtradas)  # Conjunto para usar com Jaccard
+        lista_textos_filtrados.append(texto_limpo)
+
+# Cálculo da matriz de similaridade de Jaccard
+total_textos = len(lista_textos_filtrados)
+matriz_jaccard = np.zeros((total_textos, total_textos))
+
+for i, j in itertools.combinations(range(total_textos), 2):
     intersecao = len(lista_textos_filtrados[i] & lista_textos_filtrados[j])
     uniao = len(lista_textos_filtrados[i] | lista_textos_filtrados[j])
     jaccard = intersecao / uniao if uniao != 0 else 0
     matriz_jaccard[i][j] = jaccard
     matriz_jaccard[j][i] = jaccard
 
-# Colocar 1.0 na diagonal principal (comparação de um texto com ele mesmo)
+# Diagonal principal = 1
 for i in range(total_textos):
     matriz_jaccard[i][i] = 1.0
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_jaccard.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+    escritor = csv.writer(arquivo_csv)
+
+    # Escrever o cabeçalho
+    escritor.writerow([''] + nome_textos)
+
+    # Escrever cada linha da matriz com o nome do texto no início
+    for nome, linha in zip(nome_textos, matriz_jaccard):
+        escritor.writerow([nome] + [round(valor, 4) for valor in linha])
+
+matriz_julio = np.zeros((total_textos, len(palavras_unicas_filtradas)), dtype=int)
+for j in range(len(lista_textos_filtrados)):
+    texto = lista_textos_filtrados[j]  # Pega o texto atual
+    for i in range(len(palavras_unicas_filtradas)):
+        if( palavras_unicas_filtradas[i] in texto ):
+            matriz_julio[j][i]=1
+import csv
+
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_julio.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+    escritor = csv.writer(arquivo_csv)
+
+    # Escreve o cabeçalho com as palavras únicas
+    escritor.writerow(['Texto'] + palavras_unicas_filtradas)
+
+    # Escreve cada linha: índice ou nome do texto + presença das palavras
+    for i in range(total_textos):
+        escritor.writerow([nome_textos[i]] + list(matriz_julio[i]))
+
+with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\palavras_filtradas.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+    escritor = csv.writer(arquivo_csv)
+
+    # Escreve o cabeçalho
+    escritor.writerow(['Palavra', 'Contagem'])
+
+    # Escreve cada palavra e sua contagem
+    for linha in matriz_contagem_de_palavras_por_texto:
+        escritor.writerow(linha)
+df = pd.read_csv(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_jaccard.csv', nrows=5)
+
+print(df)
