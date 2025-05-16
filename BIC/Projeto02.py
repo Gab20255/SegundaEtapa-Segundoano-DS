@@ -35,16 +35,23 @@ for i in range(quantidade_de_palavras_unicas):
     for j in (lista_dos_textos):
         if palavras_unicas[i] in j:
             contagempalavras[i]= contagempalavras[i]+1
-matriz_contagem_de_palavras_por_texto= []#matriz que armazenara as palavras filtradas
-palavras_unicas_filtradas= []
-nova_quantidade_de_palavras_unicas=0
+
+matriz_contagem_de_palavras_por_texto = []
+palavras_unicas_filtradas = []
+
 for i in range(quantidade_de_palavras_unicas):
-    if contagempalavras[i]>100 or contagempalavras[i]==1 or len(palavras_unicas[i])<3 or  palavras_unicas[i].isnumeric():
-        contagempalavras[i]=0
-    if contagempalavras[i]!=0:
-        matriz_contagem_de_palavras_por_texto.append([palavras_unicas[i], contagempalavras[i]])
-        nova_quantidade_de_palavras_unicas= nova_quantidade_de_palavras_unicas+1
-        palavras_unicas_filtradas.append(palavras_unicas[i])
+    if contagempalavras[i] > 100:
+        continue
+    if contagempalavras[i] == 1:
+        continue
+    if len(palavras_unicas[i]) < 3:
+        continue
+    if palavras_unicas[i].isnumeric():
+        continue
+    matriz_contagem_de_palavras_por_texto.append([palavras_unicas[i], contagempalavras[i]])
+    palavras_unicas_filtradas.append(palavras_unicas[i])
+
+
 nome_textos= []
 lista_textos_filtrados = []
 for texto in lista_dos_textos:
@@ -106,6 +113,3 @@ with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2
     # Escreve cada palavra e sua contagem
     for linha in matriz_contagem_de_palavras_por_texto:
         escritor.writerow(linha)
-df = pd.read_csv(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_jaccard.csv', nrows=5)
-
-print(df)
