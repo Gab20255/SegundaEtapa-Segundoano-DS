@@ -1,8 +1,6 @@
 #biblioteca que remove caractereaabss estranhos do teXto
-import re 
 import pandas as pd
 #Fazer contagem de valores, palavras e agrupa-las
-from collections import defaultdict
 
 #fazer a comparação entre os pares de texto
 import itertools
@@ -11,7 +9,6 @@ import itertools
 import csv
 
 #biblioteca de contagem de palavras
-from collections import Counter
 
 #biblioteca de funções de cauculos matemáticos
 import numpy as np
@@ -92,7 +89,6 @@ for j in range(len(lista_textos_filtrados)):
     for i in range(len(palavras_unicas_filtradas)):
         if( palavras_unicas_filtradas[i] in texto ):
             matriz_julio[j][i]=1
-import csv
 
 with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_julio.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     escritor = csv.writer(arquivo_csv)
