@@ -39,6 +39,7 @@ def questao01():
 def questao02():
     t= dados02[:,0]
     mv= dados02[:,1]
+    print(len(t))
     lny= np.log(mv)
     r, lnV0= np.polyfit(t, lny, 1)
     V0= np.exp(lnV0)
