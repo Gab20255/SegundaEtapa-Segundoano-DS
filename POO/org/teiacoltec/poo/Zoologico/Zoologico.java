@@ -1,7 +1,10 @@
 package Zoologico;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Zoologico {
+public class Zoologico implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     protected ArrayList<Animal> animais;
     protected int capacidade;
 

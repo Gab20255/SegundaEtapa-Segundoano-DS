@@ -1,6 +1,7 @@
 package Zoologico;
+import java.io.Serializable;
 
-public abstract class Animal {
+public abstract class Animal implements Serializable {
     protected String nome;
     protected int idade;
     protected String som;
