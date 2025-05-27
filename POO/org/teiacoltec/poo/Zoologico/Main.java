@@ -1,37 +1,60 @@
 package Zoologico;
 
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        Cachorro l= new Cachorro("MAX", 7, "Auau", "Macio", "Golden");
-        Gato a= new Gato("Felix", 10, "Miaauu", "Macio", "Olho Verde");
-        Papagaio c= new Papagaio("Louro", 10, "Oi meu nome é louro", 0.6, "Eu amo JAVA!");
-        Cobra n= new Cobra("Naja", 50,"sssss", "Flexivel", 6);
-        Zoologico zoo= new Zoologico(10);
-        try{
-            zoo.adicionarAnimal(a);
-            zoo.buscarAnimal("Gabriel");
-            zoo.removerAnimal(n);
-            zoo.adicionarAnimal(a);
+        ZoologicoManager manager = new ZoologicoManager();
+        Random random = new Random();
+
+        String[] nomes = {"Luna", "Simba", "Milo", "Kira", "Bidu"};
+        String[] raças = {"Poodle", "Labrador", "Pitbull"};
+        String[] olhos = {"Azul", "Verde", "Castanho"};
+        String[] frases = {"Olá!", "Quer um biscoito?", "Tudo bem?"};
+        String[] pelos = {"curto", "médio", "longo"};
+        String[] escamas = {"brilhante", "áspera"};
+
+        for (int i = 0; i < 10; i++) {
+            if (manager.getZoologicos().isEmpty() || random.nextInt(10) < 3) {
+                manager.adicionarZoologico(new Zoologico(10));
+                System.out.println("Novo zoológico criado!");
+            }
+            Zoologico z = manager.getZoologicos().get(random.nextInt(manager.getZoologicos().size()));
+            Animal a = null;
+            String nome = nomes[random.nextInt(nomes.length)] + i;
+            int idade = random.nextInt(15) + 1;
+            String som = "Som" + i;
+
+            int tipo = random.nextInt(4); // 0 = Cachorro, 1 = Gato, 2 = Papagaio, 3 = Cobra
+
+            switch (tipo) {
+                case 0:
+                    a = new Cachorro(nome, idade, som, pelos[random.nextInt(pelos.length)], raças[random.nextInt(raças.length)]);
+                    break;
+                case 1:
+                    a = new Gato(nome, idade, som, pelos[random.nextInt(pelos.length)], olhos[random.nextInt(olhos.length)]);
+                    break;
+                case 2:
+                    a = new Papagaio(nome, idade, som, 0.4 + random.nextDouble(), frases[random.nextInt(frases.length)]);
+                    break;
+                case 3:
+                    a = new Cobra(nome, idade, som, escamas[random.nextInt(escamas.length)], random.nextInt(10));
+                    break;
+            }
+            try {
+                z.adicionarAnimal(a);
+                System.out.println("Animal adicionado: " + nome + " (" + a.getClass().getSimpleName() + ")");
+            } catch (Exception e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
         }
-        catch(JaExisteAnimalException | AnimalNaoEncontradoException e) {
-            System.err.println("Erro ao criar animal");
+        int contador = 1;
+        for (Zoologico z : manager.getZoologicos()) {
+            System.out.println("\nZoológico #" + contador++);
+            z.listarAnimais();
         }
-        ExibirAnimal(l);
-        ExibirAnimal(n);
-        ExibirAnimal(c);
-        ExibirAnimal(a);
-        l.emitir_som(7);
-        interagirComAnimalDomestico(l);
-        interagirComAnimalDomestico(a);
+
+        manager.salvarZoologicos();
     }
-    public static void ExibirAnimal(Animal animal){
-        System.out.println("Nome: " + animal.get_nome());
-        System.out.println("Idade: " + animal.get_idade());
-        System.out.print("Som: ");
-        animal.emitir_som();
     }
-    public static void interagirComAnimalDomestico(InterfaceAnimaldomestico animal) {
-        animal.levarParaPassear();
-        animal.Brincar();
-    }
-}
+
