@@ -25,7 +25,7 @@ public class ZoologicoManager {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(arq))) {
             return (ArrayList<Zoologico>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            return new ArrayList<>(); // se não existe ainda
+            return new ArrayList<>(); 
         }
     }
 }
