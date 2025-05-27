@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package Zoologico;
 
 public class Ave extends Animal {
     protected double Envergadura;

@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package Zoologico;
 
 public class Main {
     public static void main(String[] args) {

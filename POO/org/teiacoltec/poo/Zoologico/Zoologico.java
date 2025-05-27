@@ -1,40 +1,45 @@
-package ProjetoInterface;
+package Zoologico;
+import java.util.ArrayList;
 
 public class Zoologico {
-    protected Animal[] animais;
-    protected int quantidadeDeAnimais;
+    protected ArrayList<Animal> animais;
+    protected int capacidade;
 
     public Zoologico(int capacidade) {
-        animais = new Animal[capacidade];
-        quantidadeDeAnimais = 0;
+        this.animais = new ArrayList<>();
+        this.capacidade = capacidade;
     }
 
     public void adicionarAnimal(Animal animal) throws JaExisteAnimalException, AnimalNaoEncontradoException  {
-        int a=0;
-        if(a==-1){
-            throw new JaExisteAnimalException("Animal '" + animal.get_nome() + "' já existe.");
+         for (Animal a : animais) {
+            if (a.get_nome().equalsIgnoreCase(animal.get_nome())) {
+                throw new JaExisteAnimalException("Animal '" + animal.get_nome() + "' já existe.");
+            }
         }
-        animais[quantidadeDeAnimais] = animal;
-        quantidadeDeAnimais++;
+        animais.add(animal);
+        capacidade++;
     }
+    
 
     public void removerAnimal(Animal animal) throws AnimalNaoEncontradoException, JaExisteAnimalException {
-        int index = buscarAnimal(animal.get_nome());
-        if (index != -1) {
-            for (int i = index; i < quantidadeDeAnimais - 1; i++) {
-                animais[i] = animais[i + 1];
+        int aux=-1;
+        for(int i=0; i<animais.size();i++){
+            if(animais.get(i).get_nome().equalsIgnoreCase(animal.get_nome())){
+                animais.remove(i);
+                capacidade--;
+                aux=1;
+                break;
             }
-            animais[quantidadeDeAnimais - 1] = null;
-            quantidadeDeAnimais--;
-        } else {
+        }
+        if(aux==-1){
             throw new AnimalNaoEncontradoException("Animal '" + animal.get_nome() + "' não encontrado no zoológico.");
         }
     }
 
     public int buscarAnimal(String nome) throws AnimalNaoEncontradoException, JaExisteAnimalException {
         int index=-1;
-        for (int i = 0; i < quantidadeDeAnimais; i++) {
-            if (animais[i].get_nome().equalsIgnoreCase(nome)) {
+        for (int i = 0; i < animais.size(); i++) {
+            if (animais.get(i).get_nome().equalsIgnoreCase(nome)) {
                 index=i;
             }
         }

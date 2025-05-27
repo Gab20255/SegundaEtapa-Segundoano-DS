@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package Zoologico;
 
 public class Reptil extends Animal {
     protected String tipoDeEscama;

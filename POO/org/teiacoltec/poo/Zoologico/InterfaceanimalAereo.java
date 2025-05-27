@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package Zoologico;
 
 public interface InterfaceanimalAereo {
     void razante();

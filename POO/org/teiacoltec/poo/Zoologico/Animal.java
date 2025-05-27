@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package Zoologico;
 
 public abstract class Animal {
     protected String nome;
