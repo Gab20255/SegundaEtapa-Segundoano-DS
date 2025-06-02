@@ -1,0 +1,40 @@
+Modelo Conceitual
+
+- Definição do Conceito, dos objetivos e da estrutura do Banco de Dados
+
+FUNDAMENTOS:
+
+-Organização de Ideias
+-Genêrico
+-Ulizamos diagramas Entidade-relacionamento
+
+TEORIA:
+
+-Tipos de dados e relações
+
+DER:
+Conceitos: Entidade, Atributo e relacionamento
+
+Entidade:
+-Conjuntos de Objetos do mesmo Tipo, com as mesmas informações que podem relacionar-se umas com as outras
+Atributo:
+-São as informações das entidades únicos
+Relacionamento:
+-Relação das Entidades entre si
+
+Representação Gráfica:
+
+Entidade=Retangulo |  | classe
+Atributo= ° bolinha( *Identificador)
+Instância: Ocorrência, objeto específico objeto
+Relacionalmento: <Relação> Losango
+
+Auto-Relacionamento
+-Uma instância relaciona com outra, uma pessoa-amigo relaciona com outra pessoa-amiga
+
+CARDINALIDADE:
+Relação de Uma instância ou instancias de uma entidade com outra instancias ou instancia de uma Entidade:
+CARDINALIDADE minima da entidade no relacionamento é o número mínimo de ocoências de entidade associadas a uma ocorrência da entidade em questão através do relacionamento. 0= relacionamento opcinal
+1 = relacionamento obrigatório
+CARDINALIDADE máxima da entidade no relacionamento é o número máximo de ocoências de entidade associada a uma ocorrência da entidade em questão através do relacionamento. 1= só pode ter uma ocorrêncian = mais de uma ocorrência
+
