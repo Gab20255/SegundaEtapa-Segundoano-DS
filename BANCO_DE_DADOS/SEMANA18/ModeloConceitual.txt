@@ -38,3 +38,9 @@ CARDINALIDADE minima da entidade no relacionamento é o número mínimo de ocoê
 1 = relacionamento obrigatório
 CARDINALIDADE máxima da entidade no relacionamento é o número máximo de ocoências de entidade associada a uma ocorrência da entidade em questão através do relacionamento. 1= só pode ter uma ocorrêncian = mais de uma ocorrência
 
+|Empregados| 1,n -----<Lotação> ------ 1,1 ---Departamento
+um departamento pode ter de um a n empregados 
+um empregado deve ter apenas um departamento
+
+
+
