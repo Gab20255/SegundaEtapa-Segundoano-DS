@@ -1,4 +1,4 @@
-package ProjetoInterface.ProjetoInterface;
+package ProjetoInterface;
 public class Main {
     public static void main(String[] args) {
         Cachorro l= new Cachorro("MAX", 7, "Auau", "Macio", "Golden");

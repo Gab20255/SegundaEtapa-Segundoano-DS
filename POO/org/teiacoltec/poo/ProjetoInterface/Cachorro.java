@@ -1,4 +1,4 @@
-package ProjetoInterface.ProjetoInterface;
+package ProjetoInterface;
 
 public class Cachorro extends Mamifero implements InterfaceAnimaldomestico, InterfaceAnimalterrestre{
     protected String raca;

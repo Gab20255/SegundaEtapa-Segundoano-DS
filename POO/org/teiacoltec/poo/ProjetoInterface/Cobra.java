@@ -1,4 +1,4 @@
-package ProjetoInterface.ProjetoInterface;
+package ProjetoInterface;
 
 public class Cobra extends Reptil implements InterfaceAnimalAquatico, InterfaceAnimalterrestre {
     protected int IntensidadedeVeneno;

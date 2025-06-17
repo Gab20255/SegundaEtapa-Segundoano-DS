@@ -1,4 +1,4 @@
-package ProjetoInterface.ProjetoInterface;
+package ProjetoInterface;
 
 public interface InterfaceAnimalAquatico {
     void nadar();
