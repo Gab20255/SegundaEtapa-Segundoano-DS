@@ -20,8 +20,8 @@ def Ajustepolinomialgeral(x, y, grau):
     teta=np.linalg.inv(xt_x)@ matriz_x_t @ y
     return teta
 
-dados01 = np.loadtxt(r'BANCO_DE_DADOS\AtividadeExtra\CrescimentoExponencialJuros.dat')
-dados02= np.loadtxt(r'BANCO_DE_DADOS\AtividadeExtra\ComESemRuido.dat')
+dados01 = np.loadtxt(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BANCO_DE_DADOS\SEMANA20\AtividadeExtra\CrescimentoExponencialJuros.dat')
+dados02= np.loadtxt(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BANCO_DE_DADOS\SEMANA20\AtividadeExtra\ComESemRuido.dat')
 def questao11():
     x=dados02[:,0]
     y_semruido=dados02[:,1]

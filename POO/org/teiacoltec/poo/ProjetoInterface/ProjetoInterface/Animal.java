@@ -1,7 +1,6 @@
-package Zoologico;
-import java.io.Serializable;
+package ProjetoInterface.ProjetoInterface;
 
-public abstract class Animal implements Serializable {
+public abstract class Animal {
     protected String nome;
     protected int idade;
     protected String som;

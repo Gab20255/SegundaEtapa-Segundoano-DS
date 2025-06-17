@@ -1,4 +1,4 @@
-package Zoologico;
+package ProjetoInterface.ProjetoInterface;
 
 public class Papagaio extends Ave implements InterfaceAnimaldomestico, InterfaceanimalAereo  {
     protected String Falarepetitiva;

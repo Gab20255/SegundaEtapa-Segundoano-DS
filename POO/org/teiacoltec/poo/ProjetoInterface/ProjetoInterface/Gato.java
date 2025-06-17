@@ -1,4 +1,4 @@
-package Zoologico;
+package ProjetoInterface.ProjetoInterface;
 
 public class Gato extends Mamifero implements InterfaceAnimalterrestre, InterfaceAnimaldomestico {
     protected String olho;
