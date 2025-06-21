@@ -1,5 +1,8 @@
 package ProjetoInterface;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,8 @@ public class Main {
         animais.add(c);
         animais.add(n);
         Zoologico zoo= new Zoologico(animais);
+        animais.remove(c);
+        Zoologico zoo2= new Zoologico(animais);
         try{
         Animal b=zoo.buscarAnimal("Viado");
         System.out.println("Animal encontrado "+b.get_nome());
@@ -44,6 +49,26 @@ public class Main {
         l.emitir_som(7);
         interagirComAnimalDomestico(l);
         interagirComAnimalDomestico(a);
+        try {
+    FileOutputStream fileOut = new FileOutputStream("Zoologicos.ser");
+    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    out.writeObject(zoo);
+    out.close();
+    fileOut.close();
+    System.out.println("Zoológico salvo com sucesso!");
+    } catch (IOException e) {
+    e.printStackTrace();
+}
+    try {
+    FileOutputStream fileOut = new FileOutputStream("Zoologicos.ser");
+    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    out.writeObject(zoo2);
+    out.close();
+    fileOut.close();
+    System.out.println("Zoológico salvo com sucesso!");
+    } catch (IOException e) {
+    e.printStackTrace();
+}
     }
     public static void ExibirAnimal(Animal animal){
         System.out.println("Nome: " + animal.get_nome());
