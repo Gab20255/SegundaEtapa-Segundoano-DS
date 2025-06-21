@@ -12,12 +12,27 @@ public class Main {
         animais[3]=n;
         Zoologico zoo= new Zoologico(animais);
         try{
-        Animal b=zoo.buscarAnimal("Naja");
-        System.out.println("Animal encontrado"+b.get_nome());
+        Animal b=zoo.buscarAnimal("Viado");
+        System.out.println("Animal encontrado "+b.get_nome());
         }
         catch(AnimalNaoEncontradoException e){
             System.out.println("Animal não encontrado nesse zoológico!\n");
         }
+        try{
+            zoo.removerAnimal("Naja");
+            System.out.println("Animal Removido com sucesso!");
+        }
+        catch(AnimalNaoEncontradoException t){
+            System.out.println("Animal não encontrado nesse zoológico!\n");
+        }
+        try{
+            zoo.AdicionarAnimal(l);
+            System.out.println("Animal Adcionado com sucesso!");
+        }
+        catch(JaExisteAnimalException f){
+            System.out.println("Esse animal já existe nesse zoológico");
+        }
+        zoo.ListarAnimais();
         ExibirAnimal(l);
         ExibirAnimal(n);
         ExibirAnimal(c);
