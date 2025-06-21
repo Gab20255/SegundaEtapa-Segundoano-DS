@@ -1,7 +1,9 @@
 package ProjetoInterface;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +20,12 @@ public class Main {
         animais.add(c);
         animais.add(n);
         Zoologico zoo= new Zoologico(animais);
-        animais.remove(c);
         Zoologico zoo2= new Zoologico(animais);
         try{
         Animal b=zoo.buscarAnimal("Viado");
         System.out.println("Animal encontrado "+b.get_nome());
         }
         catch(AnimalNaoEncontradoException e){
-            System.out.println("Animal não encontrado nesse zoológico!\n");
-        }
-        try{
-            zoo.removerAnimal("Naja");
-            System.out.println("Animal Removido com sucesso!");
-        }
-        catch(AnimalNaoEncontradoException t){
             System.out.println("Animal não encontrado nesse zoológico!\n");
         }
         try{
@@ -68,7 +62,20 @@ public class Main {
     System.out.println("Zoológico salvo com sucesso!");
     } catch (IOException e) {
     e.printStackTrace();
+} 
+try {
+    FileInputStream fileIn = new FileInputStream("Zoologicos.ser");
+    ObjectInputStream in = new ObjectInputStream(fileIn);
+    Zoologico zooLido = (Zoologico) in.readObject();
+    in.close();
+    fileIn.close();
+
+    System.out.println("Zoológico carregado:");
+    zooLido.ListarAnimais();
+} catch (IOException | ClassNotFoundException e) {
+    e.printStackTrace();
 }
+
     }
     public static void ExibirAnimal(Animal animal){
         System.out.println("Nome: " + animal.get_nome());
