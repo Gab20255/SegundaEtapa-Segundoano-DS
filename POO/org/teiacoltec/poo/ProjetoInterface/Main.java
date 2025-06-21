@@ -14,6 +14,7 @@ public class Main {
         Gato a= new Gato("Felix", 10, "Miaauu", "Macio", "Olho Verde");
         Papagaio c= new Papagaio("Louro", 10, "Oi meu nome é louro", 0.6, "Eu amo JAVA!");
         Cobra n= new Cobra("Naja", 50,"sssss", "Flexivel", 6);
+        a.emitir_som();
         List<Animal> animais= new ArrayList<Animal>();
         animais.add(l);
         animais.add(a);
@@ -52,7 +53,7 @@ public class Main {
     System.out.println("Zoológico salvo com sucesso!");
     } catch (IOException e) {
     e.printStackTrace();
-}
+    }
     try {
     FileOutputStream fileOut = new FileOutputStream("Zoologicos.ser");
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
