@@ -3,11 +3,15 @@ import java.io.Serializable;
 import java.util.*;
 public class Zoologico implements Serializable {
     protected List<Animal> animais= new ArrayList<Animal>();
+    protected int id_zoo;
     private static final long serialVersionUID = 3L;
-    Zoologico(List<Animal> animais){
-        this.animais = new ArrayList<>(animais);
+    Zoologico( int id_zoo){
+        this.id_zoo=id_zoo;
     }
-    public void AdicionarAnimal(Animal animalAdicional) throws JaExisteAnimalException{
+    public void AdicionarAnimal(Animal animalAdicional) throws JaExisteAnimalException, zooerradoException{
+            if(animalAdicional.get_id_zoo()!=id_zoo){
+                throw new zooerradoException("Agregação forçada, o animal será retirado do zoológico antigo!\n");
+            }
             if(animais.contains(animalAdicional)){
                 throw new JaExisteAnimalException("Este animal já existe nesse zoológico!\n");
             }
@@ -36,5 +40,12 @@ public class Zoologico implements Serializable {
             System.out.println("Animal 0"+(i+1)+":"+animais.get(i).getClass().getSimpleName()+" "+animais.get(i).get_nome()+"\n");
             }
         }
+    }
+    public void set_id_zoo(int id_zoo) {
+        this.id_zoo= id_zoo;
+    }
+
+    public int get_id_zoo() {
+        return id_zoo;
     }
 }

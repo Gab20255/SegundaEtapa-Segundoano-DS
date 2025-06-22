@@ -42,4 +42,11 @@ public abstract class Animal implements Serializable {
     public void set_som(String som) {
         this.som = som;
     }
+    public void set_id_zoo(int id_zoo) {
+        this.id_zoo= id_zoo;
+    }
+
+    public int get_id_zoo() {
+        return id_zoo;
+    }
 }
