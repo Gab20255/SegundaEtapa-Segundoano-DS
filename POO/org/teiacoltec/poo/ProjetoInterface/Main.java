@@ -21,7 +21,11 @@ public class Main {
         animais.add(c);
         animais.add(n);
         Zoologico zoo= new Zoologico(animais);
+        animais.remove(n);
         Zoologico zoo2= new Zoologico(animais);
+        List<Zoologico> zoologicos= new ArrayList<Zoologico>();
+        zoologicos.add(zoo);
+        zoologicos.add(zoo2);
         try{
         Animal b=zoo.buscarAnimal("Viado");
         System.out.println("Animal encontrado "+b.get_nome());
@@ -37,42 +41,32 @@ public class Main {
             System.out.println("Esse animal já existe nesse zoológico");
         }
         zoo.ListarAnimais();
-        ExibirAnimal(l);
-        ExibirAnimal(n);
-        ExibirAnimal(c);
-        ExibirAnimal(a);
-        l.emitir_som(7);
-        interagirComAnimalDomestico(l);
-        interagirComAnimalDomestico(a);
+        System.out.println("Zoologico 2 \n");
+        zoo2.ListarAnimais();
         try {
     FileOutputStream fileOut = new FileOutputStream("Zoologicos.ser");
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
-    out.writeObject(zoo);
+    out.writeObject(zoologicos);
     out.close();
     fileOut.close();
-    System.out.println("Zoológico salvo com sucesso!");
+    System.out.println("Zoológicos salvos com sucesso!");
     } catch (IOException e) {
     e.printStackTrace();
     }
-    try {
-    FileOutputStream fileOut = new FileOutputStream("Zoologicos.ser");
-    ObjectOutputStream out = new ObjectOutputStream(fileOut);
-    out.writeObject(zoo2);
-    out.close();
-    fileOut.close();
-    System.out.println("Zoológico salvo com sucesso!");
-    } catch (IOException e) {
-    e.printStackTrace();
-} 
 try {
     FileInputStream fileIn = new FileInputStream("Zoologicos.ser");
     ObjectInputStream in = new ObjectInputStream(fileIn);
-    Zoologico zooLido = (Zoologico) in.readObject();
+    List<Zoologico> zoos = (List<Zoologico>) in.readObject(); 
+
+    for (Zoologico z : zoos) {
+        int i=1;
+        System.out.println("Zoológico "+i+" carregado:\n");
+        i++;
+        z.ListarAnimais();
+    }
+
     in.close();
     fileIn.close();
-
-    System.out.println("Zoológico carregado:");
-    zooLido.ListarAnimais();
 } catch (IOException | ClassNotFoundException e) {
     e.printStackTrace();
 }

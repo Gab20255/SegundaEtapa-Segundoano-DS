@@ -5,7 +5,7 @@ public class Zoologico implements Serializable {
     protected List<Animal> animais= new ArrayList<Animal>();
     private static final long serialVersionUID = 3L;
     Zoologico(List<Animal> animais){
-        this.animais=animais;
+        this.animais = new ArrayList<>(animais);
     }
     public void AdicionarAnimal(Animal animalAdicional) throws JaExisteAnimalException{
             if(animais.contains(animalAdicional)){

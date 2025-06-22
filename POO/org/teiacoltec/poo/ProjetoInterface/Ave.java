@@ -3,8 +3,8 @@ package ProjetoInterface;
 
 public class Ave extends Animal {
     protected double Envergadura;
-    public Ave(String nome, int idade, String som, double Envergadura) {
-        super(nome, idade, som); // Chama o construtor da superclasse
+    public Ave(String nome, int idade, String som, double Envergadura,int id_zoo) {
+        super(nome, idade, som,id_zoo); // Chama o construtor da superclasse
         this.Envergadura=Envergadura;
     }
     public void Voar(){

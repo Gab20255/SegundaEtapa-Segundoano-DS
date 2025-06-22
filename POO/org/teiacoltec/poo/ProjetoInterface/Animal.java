@@ -6,11 +6,13 @@ public abstract class Animal implements Serializable {
     protected String nome;
     protected int idade;
     protected String som;
+    protected int id_zoo;
 
-    Animal(String nome, int idade, String som) {
+    Animal(String nome, int idade, String som, int id_zoo) {
         this.nome = nome;
         this.idade = idade;
         this.som = som;
+        this.id_zoo= id_zoo;
     }
     public void emitir_som(){
         System.out.println(som);

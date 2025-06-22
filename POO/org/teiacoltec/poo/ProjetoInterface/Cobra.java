@@ -2,8 +2,8 @@ package ProjetoInterface;
 
 public class Cobra extends Reptil implements InterfaceAnimalAquatico, InterfaceAnimalterrestre {
     protected int IntensidadedeVeneno;
-    public Cobra(String nome, int idade, String som, String tipoDeEscama, int IntensidadedeVeneno){
-        super(nome, idade, som, tipoDeEscama);
+    public Cobra(String nome, int idade, String som, String tipoDeEscama, int IntensidadedeVeneno, int id_zoo){
+        super(nome, idade, som, tipoDeEscama,  id_zoo);
         this.IntensidadedeVeneno=IntensidadedeVeneno;
     }
     public int get_IntensidadedeVeneno(){
