@@ -2,7 +2,7 @@ package ProjetoInterface;
 
 public class Reptil extends Animal {
     protected String tipoDeEscama;
-    public Reptil(String nome, int idade, String som, String tipoDeEscama, int id_zoo) {
+    public Reptil(String nome, int idade, String som, String tipoDeEscama) {
         super(nome, idade, som); // Chama o construtor da superclasse
         this.tipoDeEscama=tipoDeEscama;
     }

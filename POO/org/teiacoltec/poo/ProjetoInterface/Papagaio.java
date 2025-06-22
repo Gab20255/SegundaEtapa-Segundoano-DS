@@ -2,7 +2,7 @@ package ProjetoInterface;
 
 public class Papagaio extends Ave implements InterfaceAnimaldomestico, InterfaceanimalAereo  {
     protected String Falarepetitiva;
-    public Papagaio(String nome, int idade, String som, double Envergadura, String Falarepetitiva, int id_zoo){
+    public Papagaio(String nome, int idade, String som, double Envergadura, String Falarepetitiva){
         super(nome, idade, som, Envergadura);
         this.Falarepetitiva= Falarepetitiva;
     }

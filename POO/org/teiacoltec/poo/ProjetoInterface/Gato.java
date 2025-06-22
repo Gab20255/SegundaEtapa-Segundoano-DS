@@ -2,7 +2,7 @@ package ProjetoInterface;
 
 public class Gato extends Mamifero implements InterfaceAnimalterrestre, InterfaceAnimaldomestico {
     protected String olho;
-    public Gato(String nome, int idade, String som, String tipoDePelo, String olho, int id_zoo){
+    public Gato(String nome, int idade, String som, String tipoDePelo, String olho){
         super(nome,idade,som,tipoDePelo);
         this.olho=olho;
     }
