@@ -2,8 +2,8 @@ package ProjetoInterface;
 
 public class Mamifero extends Animal {
     protected String tipoDePelo;
-    public Mamifero(String nome, int idade, String som, String tipoDePelo, int id_zoo) {
-        super(nome, idade, som, id_zoo); // Chama o construtor da superclasse
+    public Mamifero(String nome, int idade, String som, String tipoDePelo) {
+        super(nome, idade, som); // Chama o construtor da superclasse
         this.tipoDePelo=tipoDePelo;
     }
     public void Amamentar(){

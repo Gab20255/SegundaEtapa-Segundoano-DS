@@ -15,7 +15,9 @@ public class Zoologico implements Serializable {
             if(animais.contains(animalAdicional)){
                 throw new JaExisteAnimalException("Este animal já existe nesse zoológico!\n");
             }
+            animalAdicional.set_id_zoo(this.id_zoo);
         animais.add(animalAdicional);
+        
     }
     public Animal buscarAnimal(String nome_do_animal_procurado) throws AnimalNaoEncontradoException{
         int id_animal_buscado=-1;
