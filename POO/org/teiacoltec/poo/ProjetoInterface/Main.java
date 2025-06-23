@@ -1,137 +1,82 @@
 package ProjetoInterface;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Cachorro l= new Cachorro("MAX", 7, "Auau", "Macio", "Golden");
-        Gato a= new Gato("Felix", 10, "Miaauu", "Macio", "Olho Verde");
-        Papagaio c= new Papagaio("Louro", 10, "Oi meu nome é louro", 0.6, "Eu amo JAVA!");
-        Cobra n= new Cobra("Naja", 50,"sssss", "Flexivel", 6);
-        a.emitir_som();
-        List<Zoologico> zoologicos= new ArrayList<Zoologico>();
-        Zoologico zoo= new Zoologico( 01);
-        Zoologico zoo2= new Zoologico(02);
-        zoologicos.add(zoo);
-        zoologicos.add(zoo2);
-        try{
-        Animal b=zoo.buscarAnimal("Viado");
-        System.out.println("Animal encontrado "+b.get_nome());
-        }
-        catch(AnimalNaoEncontradoException e){
-            System.out.println("Animal não encontrado nesse zoológico!\n");
-        }
         try {
-    zoo2.AdicionarAnimal(c);
-} catch (JaExisteAnimalException | zooerradoException e) {
-    System.out.println(e.getMessage());
-}
+            Random random = new Random();
 
-try {
-    zoo.AdicionarAnimal(l);
-} catch (JaExisteAnimalException | zooerradoException e) {
-    System.out.println(e.getMessage());
-}
+            ZoologicoDAO zoologicoDAO = new ZoologicoDAO();
+            AnimalDAO animalDAO = new AnimalDAO();
 
-try {
-    zoo.AdicionarAnimal(a);
-} catch (JaExisteAnimalException | zooerradoException e) {
-    System.out.println(e.getMessage());
-}
+            // Cria dois zoológicos
+            Zoologico zoo1 = new Zoologico(1);
+            Zoologico zoo2 = new Zoologico(2);
 
-try {
-    zoo.AdicionarAnimal(a); // tentativa duplicada, deve cair na exceção
-} catch (JaExisteAnimalException | zooerradoException e) {
-    System.out.println(e.getMessage());
-}
+            zoologicoDAO.inserir(zoo1);
+            zoologicoDAO.inserir(zoo2);
 
-try {
-    zoo.AdicionarAnimal(n);
-} catch (JaExisteAnimalException | zooerradoException e) {
-    System.out.println(e.getMessage());
-}
+            System.out.println("Zoológicos criados!");
 
-try {
-    zoo.AdicionarAnimal(n); // aqui deve dar erro de ID
-} catch (JaExisteAnimalException | zooerradoException e) {
-    System.out.println(e.getMessage());
-    transferirAnimal(n,zoo2, zoologicos );
-}
+            // Gera 5 animais aleatórios
+            for (int i = 0; i < 5; i++) {
+                Animal animal = null;
 
-        zoo.ListarAnimais();
-        System.out.println("Zoologico 2 \n");
-        zoo2.ListarAnimais();
-        try {
-    FileOutputStream fileOut = new FileOutputStream("Zoologicos.ser");
-    ObjectOutputStream out = new ObjectOutputStream(fileOut);
-    out.writeObject(zoologicos);
-    out.close();
-    fileOut.close();
-    System.out.println("Zoológicos salvos com sucesso!");
-    } catch (IOException e) {
-    e.printStackTrace();
-    }
-try {
-    FileInputStream fileIn = new FileInputStream("Zoologicos.ser");
-    ObjectInputStream in = new ObjectInputStream(fileIn);
-    List<Zoologico> zoos = (List<Zoologico>) in.readObject(); 
+                int tipoAnimal = random.nextInt(3); // 0-Mamifero, 1-Ave, 2-Reptil
+                String nome = "Animal" + (i + 1);
+                int idade = random.nextInt(10) + 1; // idade de 1 a 10
+                String som = "Som" + (i + 1);
 
-    int i = 1;
-    for (Zoologico z : zoos) {
-    System.out.println("Zoológico " + i + " carregado:\n");
-    z.ListarAnimais();
-    i++;
-}
+                switch (tipoAnimal) {
+                    case 0:
+                        animal = new Mamifero(nome, idade, som, "Pelo macio");
+                        animal.set_tipo("Mamifero");
+                        break;
+                    case 1:
+                        animal = new Ave(nome, idade, som, "Envergadura 1.5m");
+                        animal.set_tipo("Ave");
+                        break;
+                    case 2:
+                        animal = new Reptil(nome, idade, som, "Escama rugosa");
+                        animal.set_tipo("Reptil");
+                        break;
+                }
 
+                // Decide aleatoriamente em qual zoo vai
+                int zooEscolhido = random.nextInt(2) + 1; // 1 ou 2
+                if (zooEscolhido == 1) {
+                    zoo1.AdicionarAnimal(animal);
+                } else {
+                    zoo2.AdicionarAnimal(animal);
+                }
 
-    in.close();
-    fileIn.close();
-} catch (IOException | ClassNotFoundException e) {
-    e.printStackTrace();
-}
-
-    }
-    public static void ExibirAnimal(Animal animal){
-        System.out.println("Nome: " + animal.get_nome());
-        System.out.println("Idade: " + animal.get_idade());
-        System.out.print("Som: ");
-        animal.emitir_som();
-    }
-    public static void interagirComAnimalDomestico(InterfaceAnimaldomestico animal) {
-        animal.levarParaPassear();
-        animal.Brincar();
-    }
-    public static void transferirAnimal(Animal animal, Zoologico destino, List<Zoologico> zoologicos) {
-    if (animal.get_id_zoo() == destino.get_id_zoo()) {
-        System.out.println("Animal já está neste zoológico.");
-        return;
-    }
-    
-    for (Zoologico z : zoologicos) {
-        if (z.get_id_zoo() == animal.get_id_zoo()) {
-            try {
-                z.removerAnimal(animal.get_nome());
-                System.out.println("Animal removido do zoológico antigo.");
-            } catch (AnimalNaoEncontradoException e) {
-                System.out.println("Animal não encontrado no zoológico antigo.");
+                System.out.println("Animal criado: " + animal.get_nome() + " - Tipo: " + animal.get_tipo());
             }
-            break;
+
+            // Salva os zoológicos no banco (e os animais)
+            zoologicoDAO.deletar(1); // Limpa dados anteriores para não duplicar
+            zoologicoDAO.deletar(2);
+            zoologicoDAO.inserir(zoo1);
+            zoologicoDAO.inserir(zoo2);
+
+            // Lista os animais de cada zoológico
+            System.out.println("\n=== Animais do Zoológico 1 ===");
+            zoo1.ListarAnimais();
+
+            System.out.println("\n=== Animais do Zoológico 2 ===");
+            zoo2.ListarAnimais();
+
+            // Testa emissão de som dos animais do zoo1
+            System.out.println("\n=== Sons dos Animais do Zoológico 1 ===");
+            for (Animal a : zoo1.animais) {
+                System.out.print(a.get_nome() + ": ");
+                a.emitir_som();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }
-    
-    animal.set_id_zoo(destino.get_id_zoo());
-    try {
-        destino.AdicionarAnimal(animal);
-        System.out.println("Animal adicionado ao novo zoológico com sucesso.");
-    } catch (JaExisteAnimalException | zooerradoException e) {
-        System.out.println("Erro ao adicionar animal no novo zoológico: " + e.getMessage());
     }
 }
 
-}

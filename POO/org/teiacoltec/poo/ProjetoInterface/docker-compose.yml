@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: zoologico-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senhaSuperSegura
+      MYSQL_DATABASE: zoologico_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - zoologico-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: zoologico-phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+    networks:
+      - zoologico-network
+
+networks:
+  zoologico-network:
+
+

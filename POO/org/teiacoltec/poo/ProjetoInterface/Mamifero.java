@@ -1,19 +1,13 @@
 package ProjetoInterface;
 
 public class Mamifero extends Animal {
-    protected String tipoDePelo;
 
-    public Mamifero(String nome, int idade, String som, String tipoDePelo) {
-        super(nome, idade, som);
-        this.tipoDePelo = tipoDePelo;
+    public Mamifero(String nome, int idade, String som, String caracteristica) {
+        super(nome, idade, som, "Mamifero", caracteristica);
     }
-    public void Amamentar(){
-        System.out.println(nome+"Está amamentando");
-    }
-    public String getTipoDePelo(){
-        return tipoDePelo;
-    }
-    public void setTipoDePelo(String tipoDePelo){
-        this.tipoDePelo= tipoDePelo;
+    
+    public void Amamentar() {
+        System.out.println(nome + " Está amamentando");
     }
 }
+
