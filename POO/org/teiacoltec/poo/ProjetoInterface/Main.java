@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Cachorro l= new Cachorro("MAX", 7, "Auau", "Macio", "Golden", 01);
-        Gato a= new Gato("Felix", 10, "Miaauu", "Macio", "Olho Verde",01);
-        Papagaio c= new Papagaio("Louro", 10, "Oi meu nome é louro", 0.6, "Eu amo JAVA!",02);
-        Cobra n= new Cobra("Naja", 50,"sssss", "Flexivel", 6,01);
+        Cachorro l= new Cachorro("MAX", 7, "Auau", "Macio", "Golden");
+        Gato a= new Gato("Felix", 10, "Miaauu", "Macio", "Olho Verde");
+        Papagaio c= new Papagaio("Louro", 10, "Oi meu nome é louro", 0.6, "Eu amo JAVA!");
+        Cobra n= new Cobra("Naja", 50,"sssss", "Flexivel", 6);
         a.emitir_som();
         List<Zoologico> zoologicos= new ArrayList<Zoologico>();
         Zoologico zoo= new Zoologico( 01);
@@ -27,42 +27,43 @@ public class Main {
         catch(AnimalNaoEncontradoException e){
             System.out.println("Animal não encontrado nesse zoológico!\n");
         }
-        try{
-            System.out.println(n.get_id_zoo());
-            zoo2.AdicionarAnimal(c);
-            zoo.AdicionarAnimal(l);
-            zoo.AdicionarAnimal(a);
-            zoo.AdicionarAnimal(n);
-            zoo2.AdicionarAnimal(n);
-            System.out.println("Animal Adcionado com sucesso!");
-            System.out.println(n.get_id_zoo());
-        }
-        catch(JaExisteAnimalException f){
-            System.out.println("Esse animal já existe nesse zoológico");
-        }
-        catch(zooerradoException g){
-            System.out.println(g.getMessage());
-            for(int i=0; i<zoologicos.size(); i++){
-            if(zoologicos.get(i).get_id_zoo()==n.get_id_zoo()){
-                try{
-                zoologicos.get(i).removerAnimal(n.get_nome());
-                n.set_id_zoo(2);
-                }
-                catch(AnimalNaoEncontradoException e){
-            System.out.println("Animal não encontrado nesse zoológico!\n");
-        }
-        try{
-            zoo2.AdicionarAnimal(n);
-        }
-        catch(JaExisteAnimalException f){
-            System.out.println("Esse animal já existe nesse zoológico");
-        }
-        catch(zooerradoException h){
-            System.out.println(h.getMessage());
-        }
-            }
-        }
-        }
+        try {
+    zoo2.AdicionarAnimal(c);
+} catch (JaExisteAnimalException | zooerradoException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    zoo.AdicionarAnimal(l);
+} catch (JaExisteAnimalException | zooerradoException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    zoo.AdicionarAnimal(a);
+} catch (JaExisteAnimalException | zooerradoException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    zoo.AdicionarAnimal(a); // tentativa duplicada, deve cair na exceção
+} catch (JaExisteAnimalException | zooerradoException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    zoo.AdicionarAnimal(n);
+} catch (JaExisteAnimalException | zooerradoException e) {
+    System.out.println(e.getMessage());
+}
+
+try {
+    zoo.AdicionarAnimal(n); // aqui deve dar erro de ID
+} catch (JaExisteAnimalException | zooerradoException e) {
+    System.out.println(e.getMessage());
+    transferirAnimal(n,zoo2, zoologicos );
+}
+
         zoo.ListarAnimais();
         System.out.println("Zoologico 2 \n");
         zoo2.ListarAnimais();
@@ -81,12 +82,13 @@ try {
     ObjectInputStream in = new ObjectInputStream(fileIn);
     List<Zoologico> zoos = (List<Zoologico>) in.readObject(); 
 
+    int i = 1;
     for (Zoologico z : zoos) {
-        int i=1;
-        System.out.println("Zoológico "+i+" carregado:\n");
-        i++;
-        z.ListarAnimais();
-    }
+    System.out.println("Zoológico " + i + " carregado:\n");
+    z.ListarAnimais();
+    i++;
+}
+
 
     in.close();
     fileIn.close();
@@ -105,4 +107,31 @@ try {
         animal.levarParaPassear();
         animal.Brincar();
     }
+    public static void transferirAnimal(Animal animal, Zoologico destino, List<Zoologico> zoologicos) {
+    if (animal.get_id_zoo() == destino.get_id_zoo()) {
+        System.out.println("Animal já está neste zoológico.");
+        return;
+    }
+    
+    for (Zoologico z : zoologicos) {
+        if (z.get_id_zoo() == animal.get_id_zoo()) {
+            try {
+                z.removerAnimal(animal.get_nome());
+                System.out.println("Animal removido do zoológico antigo.");
+            } catch (AnimalNaoEncontradoException e) {
+                System.out.println("Animal não encontrado no zoológico antigo.");
+            }
+            break;
+        }
+    }
+    
+    animal.set_id_zoo(destino.get_id_zoo());
+    try {
+        destino.AdicionarAnimal(animal);
+        System.out.println("Animal adicionado ao novo zoológico com sucesso.");
+    } catch (JaExisteAnimalException | zooerradoException e) {
+        System.out.println("Erro ao adicionar animal no novo zoológico: " + e.getMessage());
+    }
+}
+
 }

@@ -9,13 +9,15 @@ public class Zoologico implements Serializable {
         this.id_zoo=id_zoo;
     }
     public void AdicionarAnimal(Animal animalAdicional) throws JaExisteAnimalException, zooerradoException{
+        if(animalAdicional.get_id_zoo()==-1){
+            animalAdicional.set_id_zoo(this.id_zoo);
+        }
             if(animalAdicional.get_id_zoo()!=id_zoo){
                 throw new zooerradoException("Agregação forçada, o animal será retirado do zoológico antigo!\n");
             }
             if(animais.contains(animalAdicional)){
                 throw new JaExisteAnimalException("Este animal já existe nesse zoológico!\n");
             }
-            animalAdicional.set_id_zoo(this.id_zoo);
         animais.add(animalAdicional);
         
     }

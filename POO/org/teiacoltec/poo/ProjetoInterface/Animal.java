@@ -8,45 +8,30 @@ public abstract class Animal implements Serializable {
     protected String som;
     protected int id_zoo;
 
-    Animal(String nome, int idade, String som) {
+    public Animal(String nome, int idade, String som) {
         this.nome = nome;
         this.idade = idade;
         this.som = som;
-        this.id_zoo=-1 ;
+        this.id_zoo = -1;
     }
-    public void emitir_som(){
+
+    public String get_nome() {
+        return nome;
+    }
+
+    public int get_idade() {
+        return idade;
+    }
+
+    public void emitir_som() {
         System.out.println(som);
-    }
-    public void emitir_som(int Intensidade){
-        if (Intensidade>5){
-            System.out.println(som+"...Esse foi um som de alta intensidade");
-        }
-        else{
-            System.out.println(som+"...Esse foi um som de baixa intensidade");
-        }
-    }
-    public String get_nome(){
-        return this.nome;
-    }
-    public int get_idade(){
-        return this.idade;
-    }
-    public void set_nome(String nome) {
-        this.nome = nome;
-    }
-
-    public void set_idade(int idade) {
-        this.idade = idade;
-    }
-
-    public void set_som(String som) {
-        this.som = som;
-    }
-    public void set_id_zoo(int id_zoo) {
-        this.id_zoo= id_zoo;
     }
 
     public int get_id_zoo() {
         return id_zoo;
+    }
+
+    public void set_id_zoo(int id_zoo) {
+        this.id_zoo = id_zoo;
     }
 }

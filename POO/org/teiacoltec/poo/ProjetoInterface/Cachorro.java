@@ -2,9 +2,9 @@ package ProjetoInterface;
 
 public class Cachorro extends Mamifero implements InterfaceAnimaldomestico, InterfaceAnimalterrestre{
     protected String raca;
-    public Cachorro(String nome, int idade, String som, String tipoDePelo, String raca){
-        super(nome,idade,som,tipoDePelo);
-        this.raca=raca;
+    public Cachorro(String nome, int idade, String som, String tipoDePelo, String raca) {
+        super(nome, idade, som, tipoDePelo);
+        this.raca = raca;
     }
     public void Brincar(){
         System.out.println(nome+" esta brincando com o graveto");
