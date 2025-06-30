@@ -1,72 +1,84 @@
 package ProjetoInterface;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import ProjetoInterface.Classes_de_Animais.Animal;
-import ProjetoInterface.Excecoes.JaExisteAnimalException;
-import ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
-import ProjetoInterface.Sub_Classes.Gato;
 import ProjetoInterface.Sub_Classes.Cachorro;
+import ProjetoInterface.Sub_Classes.Gato;
 
 public class Main {
+    private static final String ARQUIVO = "zoologicos.dat";
 
     public static void main(String[] args) {
-        // 1. Criar zoológicos
-        Zoologico zoo1 = new Zoologico(1);
-        Zoologico zoo2 = new Zoologico(2);
-        List<Zoologico> todosOsZoos = new ArrayList<>();
-        todosOsZoos.add(zoo1);
-        todosOsZoos.add(zoo2);
+        // Verifica se já existe arquivo salvo
+        List<Zoologico> todosOsZoos = carregarZoologicos();
+        if (todosOsZoos == null) {
+            // Cria zoológicos novos se não existir arquivo
+            todosOsZoos = new ArrayList<>();
+            todosOsZoos.add(new Zoologico(1));
+            todosOsZoos.add(new Zoologico(2));
+        }
 
-        // 2. Criar animais
+        Zoologico zoo1 = todosOsZoos.get(0);
+        Zoologico zoo2 = todosOsZoos.get(1);
+
+        // Cria animais
         Cachorro max = new Cachorro("Max", 5, "AUAU", "Macio", "Golden");
-        Gato felix = new Gato("Felix", 4, "MIaaau", "Muito macio", "Verde");
+        Gato felix = new Gato("Felix", 4, "MIAU", "Muito macio", "Verde");
 
-        // 3. Adicionar animais ao zoo1
-        adicionarAnimalAoZoologico(zoo1, felix);
         adicionarAnimalAoZoologico(zoo1, max);
+        adicionarAnimalAoZoologico(zoo1, felix);
 
-        // 4. Exibir ID do zoológico atual de Max
-        System.out.println("Zoológico atual de Max: " + max.get_id_zoo());
+        System.out.println("\nZoológico atual do Max: " + max.get_id_zoo());
 
-        // 5. Tentar mover Max para outro zoológico (zoo2)
-        System.out.println("\nTentando mover Max para outro zoológico...");
+        System.out.println("\nMovendo Max para zoo2...");
         adicionarAnimalAoZoologico(zoo2, max);
 
-        // 6. Verificar zoológico atualizado
-        System.out.println("Zoológico atual de Max: " + max.get_id_zoo());
+        System.out.println("Zoológico atual do Max: " + max.get_id_zoo());
 
-        // 7. Listar os animais dos zoológicos
+        // Listar zoológicos
         System.out.println("\n--- Zoológico 1 ---");
         zoo1.ListarAnimais();
+
         System.out.println("\n--- Zoológico 2 ---");
         zoo2.ListarAnimais();
+
+        // Serializar no final
+        salvarZoologicos(todosOsZoos);
     }
 
-    // Método auxiliar para adicionar animal e tratar exceções
     private static void adicionarAnimalAoZoologico(Zoologico zoo, Animal animal) {
         try {
             zoo.AdicionarAnimal(animal);
             System.out.println(animal.get_nome() + " adicionado ao Zoológico " + zoo.get_id_zoo());
-        } catch (JaExisteAnimalException e) {
-            System.out.println("Erro: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Erro inesperado: " + e.getMessage());
+            System.out.println("Erro ao adicionar " + animal.get_nome() + ": " + e.getMessage());
         }
     }
 
-    // Método auxiliar (ainda útil)
-    public static void exibirAmimal(Animal animal) {
-        System.out.println("Dados do Animal\n---------------------");
-        System.out.println("Nome do Animal: " + animal.get_nome());
-        System.out.println("Som do Animal: " + animal.get_som());
-        System.out.println("Idade: " + animal.get_idade() + "\n---------------------\n");
+    private static void salvarZoologicos(List<Zoologico> zoologicos) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO))) {
+            oos.writeObject(zoologicos);
+            System.out.println("\nZoológicos salvos com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar zoológicos: " + e.getMessage());
+        }
     }
 
-    public static void InteragircomAnimalDomestico(InterfaceAnimaldomestico animal) {
-        animal.levarParaPassear();
-        animal.Brincar();
+    @SuppressWarnings("unchecked")
+    private static List<Zoologico> carregarZoologicos() {
+        File arquivo = new File(ARQUIVO);
+        if (!arquivo.exists()) return null;
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO))) {
+            System.out.println("Zoológicos carregados do arquivo.");
+            return (List<Zoologico>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Erro ao carregar zoológicos: " + e.getMessage());
+            return null;
+        }
     }
 }
 

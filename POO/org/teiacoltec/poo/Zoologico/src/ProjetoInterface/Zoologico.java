@@ -8,7 +8,7 @@ import ProjetoInterface.Excecoes.JaExisteAnimalException;
 public class Zoologico implements Serializable {
     protected List<Animal> animais= new ArrayList<Animal>();
     protected int id_zoo;
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 108L;
     Zoologico( int id_zoo){
         this.id_zoo=id_zoo;
     }
