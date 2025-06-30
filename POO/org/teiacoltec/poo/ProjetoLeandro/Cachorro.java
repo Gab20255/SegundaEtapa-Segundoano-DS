@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 
 public class Cachorro extends Mamifero implements InterfaceAnimalDomestico, InterfaceAnimalTerrestre {
     protected String raca;

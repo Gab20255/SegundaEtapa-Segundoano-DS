@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 import java.io.Serializable;
 public abstract class Animal implements Serializable {
     protected String nome;

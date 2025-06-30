@@ -7,15 +7,13 @@ public class Main {
         try {
             Random random = new Random();
 
-            ZoologicoDAO zoologicoDAO = new ZoologicoDAO();
-            AnimalDAO animalDAO = new AnimalDAO();
+            
 
             // Cria dois zoológicos
             Zoologico zoo1 = new Zoologico(1);
             Zoologico zoo2 = new Zoologico(2);
 
-            zoologicoDAO.inserir(zoo1);
-            zoologicoDAO.inserir(zoo2);
+            
 
             System.out.println("Zoológicos criados!");
 
@@ -55,10 +53,7 @@ public class Main {
             }
 
             // Salva os zoológicos no banco (e os animais)
-            zoologicoDAO.deletar(1); // Limpa dados anteriores para não duplicar
-            zoologicoDAO.deletar(2);
-            zoologicoDAO.inserir(zoo1);
-            zoologicoDAO.inserir(zoo2);
+           
 
             // Lista os animais de cada zoológico
             System.out.println("\n=== Animais do Zoológico 1 ===");

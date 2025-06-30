@@ -1,11 +1,11 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 
 public class Zoologico {
     final private String nome;
     private Animal[] listaAnimais;
     public Zoologico(String nome){
         this.nome=nome;
-        this.listaAnimais=listaAnimais;
+        this.listaAnimais=new Animal[10];
     }
     public Animal Buscar_Animal(String nome_do_animal) throws AnimalNaoEncontradoExcepition{
         for(Animal a: this.listaAnimais){
@@ -24,5 +24,11 @@ public class Zoologico {
     }
     public void AdicionarAnimal(Animal animal_adicionado)throws AnimalNaoEncontradoExcepition{
         
+    }
+    public void exibirAmimal(Animal animal){
+        System.out.println("Dados do Animal\n---------------------");
+        System.out.println("Nome do Animal: "+animal.get_nome());
+        System.out.println("Som do Animal: "+animal.get_som());
+        System.out.println("Idade:"+animal.get_idade()+"\n---------------------\n");
     }
 }

@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 
 public class Mamifero extends Animal{
     protected String TipoPelo;

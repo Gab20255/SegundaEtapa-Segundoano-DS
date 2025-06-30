@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 
 public interface InterfaceAnimalAereo {
     void razante();

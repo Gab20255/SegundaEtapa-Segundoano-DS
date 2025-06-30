@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 
 public class Gato extends Mamifero implements InterfaceAnimalDomestico {
     protected String cordoolho;

@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.ProjetoLeandro;
+package ProjetoLeandro;
 
 public class AnimalNaoEncontradoExcepition extends Exception{
     public AnimalNaoEncontradoExcepition(String nome){
