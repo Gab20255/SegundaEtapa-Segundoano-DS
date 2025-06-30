@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package ProjetoInterface.Classes_de_Animais;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package ProjetoInterface.Excecoes;
 
 public class zooerradoException extends Exception {
     public zooerradoException(String message){

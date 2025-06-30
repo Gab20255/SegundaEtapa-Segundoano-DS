@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package ProjetoInterface.Excecoes;
 
 public class JaExisteAnimalException extends Exception {
     public JaExisteAnimalException(String message){

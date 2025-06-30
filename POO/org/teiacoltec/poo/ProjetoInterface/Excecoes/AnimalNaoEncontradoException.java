@@ -1,4 +1,4 @@
-package ProjetoInterface;
+package ProjetoInterface.Excecoes;
 
 
 public class AnimalNaoEncontradoException  extends Exception  {

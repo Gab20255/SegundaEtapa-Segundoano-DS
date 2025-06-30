@@ -1,6 +1,11 @@
 package ProjetoInterface;
 import java.io.Serializable;
 import java.util.*;
+
+import ProjetoInterface.Classes_de_Animais.Animal;
+import ProjetoInterface.Excecoes.AnimalNaoEncontradoException;
+import ProjetoInterface.Excecoes.JaExisteAnimalException;
+import ProjetoInterface.Excecoes.zooerradoException;
 public class Zoologico implements Serializable {
     protected List<Animal> animais= new ArrayList<Animal>();
     protected int id_zoo;
@@ -30,7 +35,7 @@ public class Zoologico implements Serializable {
             }
         }
         if(id_animal_buscado==-1){
-            throw new AnimalNaoEncontradoException("Animal não encontrado, ele não está nesse zoo!\n");
+            throw new AnimalNaoEncontradoException("Não encontrado");
         }
         return animais.get(id_animal_buscado);
     }
