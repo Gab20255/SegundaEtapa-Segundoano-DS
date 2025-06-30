@@ -5,7 +5,6 @@ import java.util.*;
 import ProjetoInterface.Classes_de_Animais.Animal;
 import ProjetoInterface.Excecoes.AnimalNaoEncontradoException;
 import ProjetoInterface.Excecoes.JaExisteAnimalException;
-import ProjetoInterface.Excecoes.zooerradoException;
 public class Zoologico implements Serializable {
     protected List<Animal> animais= new ArrayList<Animal>();
     protected int id_zoo;
@@ -13,18 +12,27 @@ public class Zoologico implements Serializable {
     Zoologico( int id_zoo){
         this.id_zoo=id_zoo;
     }
-    public void AdicionarAnimal(Animal animalAdicional) throws JaExisteAnimalException, zooerradoException{
-        if(animalAdicional.get_id_zoo()==-1){
-            animalAdicional.set_id_zoo(this.id_zoo);
+    public void AdicionarAnimal(Animal animal) throws JaExisteAnimalException{
+        if(animal.get_id_zoo()==-1){
+            animal.set_id_zoo(this.id_zoo);
         }
-            if(animalAdicional.get_id_zoo()!=id_zoo){
-                animalAdicional.set_id_zoo(id_zoo);
-                throw new zooerradoException("O animal está mudando de zoologico");
-            }
-            if(animais.contains(animalAdicional)){
+           Zoologico antigo = animal.getZoologicoAtual();
+    if (antigo != null && antigo != this) {
+        try{
+        antigo.removerAnimal(animal.get_nome());
+        }
+        catch(AnimalNaoEncontradoException F){
+            System.out.println("Animal não existe nesse");
+        }
+    }
+    animal.setZoologicoAtual(this);
+    animal.set_id_zoo(this.id_zoo);
+    animais.add(animal);
+        
+            if(animais.contains(animal)){
                 throw new JaExisteAnimalException("Este animal já existe nesse zoológico!\n");
             }
-        animais.add(animalAdicional);
+        
         
     }
     public Animal buscarAnimal(String nome_do_animal_procurado) throws AnimalNaoEncontradoException{

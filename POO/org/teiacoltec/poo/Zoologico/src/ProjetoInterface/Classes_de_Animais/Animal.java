@@ -2,11 +2,22 @@ package ProjetoInterface.Classes_de_Animais;
 
 import java.io.Serializable;
 
+import ProjetoInterface.Zoologico;
+
 public abstract class Animal implements Serializable {
     protected String nome;
     protected int idade;
     protected String som;
     protected int id_zoo;
+    private Zoologico zoologicoAtual;
+
+    public Zoologico getZoologicoAtual() {
+        return zoologicoAtual;
+    }
+
+    public void setZoologicoAtual(Zoologico zoo) {
+        this.zoologicoAtual = zoo;
+    }
 
     public Animal(String nome, int idade, String som) {
         this.nome = nome;
