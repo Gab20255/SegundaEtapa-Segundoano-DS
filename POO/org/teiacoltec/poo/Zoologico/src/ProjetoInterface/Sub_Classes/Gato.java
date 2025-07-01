@@ -8,6 +8,7 @@ public class Gato extends Mamifero implements InterfaceAnimalterrestre, Interfac
         super(nome,idade,som,tipoDePelo);
         this.id_zoo=-1;
         this.olho=olho;
+        this.set_Caracteristica(olho);
     }
     public void Brincar(){
         System.out.println(nome+" esta brincando com o novelo de lã");
@@ -23,5 +24,9 @@ public class Gato extends Mamifero implements InterfaceAnimalterrestre, Interfac
     }
     public void set_olho(String olho){
         this.olho= olho;
+    }
+    public void set_Caracteristica(String caracteristica) {
+        super.set_Caracteristica(Caracteristica);
+        this.olho = Caracteristica;
     }
 }

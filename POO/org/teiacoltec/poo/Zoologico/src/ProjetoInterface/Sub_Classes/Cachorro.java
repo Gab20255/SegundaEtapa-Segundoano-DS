@@ -10,6 +10,7 @@ public class Cachorro extends Mamifero implements InterfaceAnimaldomestico, Inte
         super(nome,idade,som,tipoDePelo);
         this.id_zoo=-1;
         this.raca=raca;
+        this.set_Caracteristica(raca);
     }
     public void Brincar(){
         System.out.println(nome+" esta brincando com o graveto");
@@ -25,6 +26,10 @@ public class Cachorro extends Mamifero implements InterfaceAnimaldomestico, Inte
     }
     public void set_raca(String raca){
         this.raca= raca;
+    }
+    public void set_Caracteristica(String caracteristica) {
+        super.set_Caracteristica(caracteristica);
+        this.raca = caracteristica;
     }
 }
 

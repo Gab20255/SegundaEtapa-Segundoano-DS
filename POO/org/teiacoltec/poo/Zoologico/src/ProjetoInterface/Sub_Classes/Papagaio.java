@@ -12,6 +12,7 @@ public class Papagaio extends Ave implements InterfaceAnimaldomestico, Interface
         super(nome, idade, som, Envergadura);
         this.id_zoo=-1;
         this.Falarepetitiva= Falarepetitiva;
+        this.set_Caracteristica(Falarepetitiva);
     }
     public void Brincar(){
         System.out.println(nome+" está brincando de pular em seu vivero");
@@ -31,5 +32,10 @@ public class Papagaio extends Ave implements InterfaceAnimaldomestico, Interface
     public void set_Falarepetitiva(String Falarepetitiva){
         this.Falarepetitiva= Falarepetitiva;
     }
+    public void set_Caracteristica(String caracteristica) {
+        super.set_Caracteristica(Caracteristica);
+        this.Falarepetitiva = Caracteristica;
+    }
+
 }
 

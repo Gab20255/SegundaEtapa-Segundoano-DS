@@ -8,6 +8,7 @@ public class Cobra extends Reptil implements InterfaceAnimalAquatico, InterfaceA
         super(nome, idade, som, tipoDeEscama);
         this.id_zoo=-1;
         this.IntensidadedeVeneno=IntensidadedeVeneno;
+        this.set_Caracteristica(String.valueOf(IntensidadedeVeneno));
     }
     public int get_IntensidadedeVeneno(){
         return this.IntensidadedeVeneno;
@@ -26,6 +27,10 @@ public class Cobra extends Reptil implements InterfaceAnimalAquatico, InterfaceA
     }
     public void movimentar(){
         System.out.println(nome+" esta rastejando pela floresta");
+    }
+    public void set_Caracteristica(String caracteristica) {
+        super.set_Caracteristica(Caracteristica);
+        this.IntensidadedeVeneno = Integer.parseInt(Caracteristica);
     }
 }
 
