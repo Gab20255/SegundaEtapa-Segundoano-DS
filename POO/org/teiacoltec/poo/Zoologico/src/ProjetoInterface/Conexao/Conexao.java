@@ -9,9 +9,6 @@ import java.sql.SQLException;
 public class Conexao {
 
     final private static String MYSQL_JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    final private static int DB_PORT = 8082;
-    final private static String DB_HOST = "localhost";
-    final private static String DB_NAME = "coltec";
 
     // Bloco estático para carregamento do driver
     static {
@@ -30,7 +27,7 @@ public class Conexao {
     public static Connection obtemConexao() throws FalhaConexaoException {
 
         // Configurações de conexão
-        String url = "jdbc:mysql:// " + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+        String url = "jdbc:mysql://localhost:8082/coltec";
         String usuario = "root";
         String senha = "Azeitona07";
 

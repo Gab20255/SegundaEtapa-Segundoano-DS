@@ -6,6 +6,7 @@ public class Gato extends Mamifero implements InterfaceAnimalterrestre, Interfac
     protected String olho;
     public Gato(String nome, int idade, String som, String tipoDePelo, String olho){
         super(nome,idade,som,tipoDePelo);
+        this.set_tipo("Gato");
         this.id_zoo=-1;
         this.olho=olho;
         this.set_Caracteristica(olho);
@@ -26,7 +27,7 @@ public class Gato extends Mamifero implements InterfaceAnimalterrestre, Interfac
         this.olho= olho;
     }
     public void set_Caracteristica(String caracteristica) {
-        super.set_Caracteristica(Caracteristica);
-        this.olho = Caracteristica;
+        super.set_Caracteristica(caracteristica);
+        this.olho = caracteristica;
     }
 }

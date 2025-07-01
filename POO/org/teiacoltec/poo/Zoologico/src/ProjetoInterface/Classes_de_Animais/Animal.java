@@ -5,6 +5,7 @@ import java.io.Serializable;
 import ProjetoInterface.Zoologico;
 
 public abstract class Animal implements Serializable {
+    protected int id;  // novo atributo
     protected String nome;
     protected int idade;
     protected String som;
@@ -27,6 +28,14 @@ public abstract class Animal implements Serializable {
         this.tipo=tipo;
         this.Caracteristica=Caracteristica;
         this.id_zoo = -1;
+        this.id=0;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String get_som() {

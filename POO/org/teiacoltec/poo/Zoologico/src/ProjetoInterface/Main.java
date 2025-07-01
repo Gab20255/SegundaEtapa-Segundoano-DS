@@ -1,84 +1,87 @@
 package ProjetoInterface;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import ProjetoInterface.Classes_de_Animais.Animal;
-import ProjetoInterface.Sub_Classes.Cachorro;
-import ProjetoInterface.Sub_Classes.Gato;
+import ProjetoInterface.Classes_de_Animais.*;
+import ProjetoInterface.Sub_Classes.*;
+import ProjetoInterface.Classes_DAO.*;
+import ProjetoInterface.Excecoes.*;
 
 public class Main {
-    private static final String ARQUIVO = "zoologicos.dat";
-
     public static void main(String[] args) {
-        // Verifica se já existe arquivo salvo
-        List<Zoologico> todosOsZoos = carregarZoologicos();
-        if (todosOsZoos == null) {
-            // Cria zoológicos novos se não existir arquivo
-            todosOsZoos = new ArrayList<>();
-            todosOsZoos.add(new Zoologico(1));
-            todosOsZoos.add(new Zoologico(2));
-        }
-
-        Zoologico zoo1 = todosOsZoos.get(0);
-        Zoologico zoo2 = todosOsZoos.get(1);
-
-        // Cria animais
-        Cachorro max = new Cachorro("Max", 5, "AUAU", "Macio", "Golden");
-        Gato felix = new Gato("Felix", 4, "MIAU", "Muito macio", "Verde");
-
-        adicionarAnimalAoZoologico(zoo1, max);
-        adicionarAnimalAoZoologico(zoo1, felix);
-
-        System.out.println("\nZoológico atual do Max: " + max.get_id_zoo());
-
-        System.out.println("\nMovendo Max para zoo2...");
-        adicionarAnimalAoZoologico(zoo2, max);
-
-        System.out.println("Zoológico atual do Max: " + max.get_id_zoo());
-
-        // Listar zoológicos
-        System.out.println("\n--- Zoológico 1 ---");
-        zoo1.ListarAnimais();
-
-        System.out.println("\n--- Zoológico 2 ---");
-        zoo2.ListarAnimais();
-
-        // Serializar no final
-        salvarZoologicos(todosOsZoos);
-    }
-
-    private static void adicionarAnimalAoZoologico(Zoologico zoo, Animal animal) {
         try {
-            zoo.AdicionarAnimal(animal);
-            System.out.println(animal.get_nome() + " adicionado ao Zoológico " + zoo.get_id_zoo());
+            ZoologicoDAO zoologicoDAO = new ZoologicoDAO();
+            AnimalDAO animalDAO = new AnimalDAO();
+
+            Random random = new Random();
+
+            // Criar dois zoológicos e salvar no banco
+            Zoologico zoo1 = new Zoologico(1);
+            Zoologico zoo2 = new Zoologico(2);
+
+            zoologicoDAO.salvar(zoo1);
+            zoologicoDAO.salvar(zoo2);
+
+            // Criar alguns animais aleatórios
+            for (int i = 0; i < 5; i++) {
+                Animal animal;
+                int tipo = random.nextInt(3); // 0=mamifero,1=ave,2=reptil
+
+                switch (tipo) {
+                    case 0: // Mamífero
+                        animal = new Cachorro("Cachorro" + i, random.nextInt(15), "Auau", "Curto", "Golden");
+                        break;
+                    case 1: // Ave
+                        animal = new Papagaio("Papagaio" + i, random.nextInt(15), "Fala", 1.2 + i * 0.1, "Fala repetitiva " + i);
+                        break;
+                    default: // Réptil
+                        animal = new Reptil("Reptil" + i, random.nextInt(15), "Som Reptil", "Escamas " + i);
+                        break;
+                }
+
+                // Escolhe zoológico aleatório para adicionar
+                Zoologico zooEscolhido = (random.nextBoolean()) ? zoo1 : zoo2;
+
+                // Define id_zoo e zoologicoAtual para o animal
+                animal.set_id_zoo(zooEscolhido.get_id_zoo());
+                animal.setZoologicoAtual(zooEscolhido);
+
+                // Adiciona animal no zoológico em memória e banco
+                try {
+                    zooEscolhido.AdicionarAnimal(animal);
+                    animalDAO.salvar(animal);
+                    System.out.println("Animal " + animal.get_nome() + " adicionado ao Zoológico " + zooEscolhido.get_id_zoo());
+                } catch (JaExisteAnimalException e) {
+                    System.out.println("Animal já existe no zoológico: " + animal.get_nome());
+                }
+            }
+
+            // Buscar e listar animais de cada zoológico do banco
+            System.out.println("\nAnimais no Zoológico 1:");
+            List<Animal> animaisZoo1 = animalDAO.buscarPorZoologico(1);
+            for (Animal a : animaisZoo1) {
+                exibirAnimal(a);
+            }
+
+            System.out.println("\nAnimais no Zoológico 2:");
+            List<Animal> animaisZoo2 = animalDAO.buscarPorZoologico(2);
+            for (Animal a : animaisZoo2) {
+                exibirAnimal(a);
+            }
+
         } catch (Exception e) {
-            System.out.println("Erro ao adicionar " + animal.get_nome() + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    private static void salvarZoologicos(List<Zoologico> zoologicos) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO))) {
-            oos.writeObject(zoologicos);
-            System.out.println("\nZoológicos salvos com sucesso.");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar zoológicos: " + e.getMessage());
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static List<Zoologico> carregarZoologicos() {
-        File arquivo = new File(ARQUIVO);
-        if (!arquivo.exists()) return null;
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO))) {
-            System.out.println("Zoológicos carregados do arquivo.");
-            return (List<Zoologico>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Erro ao carregar zoológicos: " + e.getMessage());
-            return null;
-        }
+    public static void exibirAnimal(Animal animal) {
+        System.out.println("Nome: " + animal.get_nome() +
+                ", Tipo: " + animal.get_tipo() +
+                ", Característica: " + animal.get_Caracteristica() +
+                ", Idade: " + animal.get_idade());
     }
 }
+
+
 

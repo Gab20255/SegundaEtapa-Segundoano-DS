@@ -6,10 +6,10 @@ import ProjetoInterface.Classes_de_Animais.Animal;
 import ProjetoInterface.Excecoes.AnimalNaoEncontradoException;
 import ProjetoInterface.Excecoes.JaExisteAnimalException;
 public class Zoologico implements Serializable {
-    protected List<Animal> animais= new ArrayList<Animal>();
-    protected int id_zoo;
+    final private  List<Animal> animais= new ArrayList<Animal>();
+    private int id_zoo;
     private static final long serialVersionUID = 108L;
-    Zoologico( int id_zoo){
+    public Zoologico( int id_zoo){
         this.id_zoo=id_zoo;
     }
     public void AdicionarAnimal(Animal animal) throws JaExisteAnimalException{
@@ -19,7 +19,7 @@ public class Zoologico implements Serializable {
            Zoologico antigo = animal.getZoologicoAtual();
     if (antigo != null && antigo != this) {
         try{
-        antigo.removerAnimal(animal.get_nome());
+        antigo.removerAnimal(animal);
         }
         catch(AnimalNaoEncontradoException F){
             System.out.println("Animal não existe nesse");
@@ -48,9 +48,14 @@ public class Zoologico implements Serializable {
         }
         return animais.get(id_animal_buscado);
     }
-    public void removerAnimal(String nome_do_animal_procurado)throws AnimalNaoEncontradoException{
-        Animal Animal_removido=buscarAnimal(nome_do_animal_procurado);
+    public void removerAnimal(Animal a)throws AnimalNaoEncontradoException{
+        Animal Animal_removido=buscarAnimal(a.get_nome());
+        Animal_removido.set_id_zoo(-1);
+        if(a!=Animal_removido){
+            throw  new AnimalNaoEncontradoException("Deu ruim");      }
+        else{
         animais.remove(Animal_removido);
+        }
     }
     public void ListarAnimais(){
         for(int i=0;i<animais.size(); i++){

@@ -11,6 +11,7 @@ public class Cachorro extends Mamifero implements InterfaceAnimaldomestico, Inte
         this.id_zoo=-1;
         this.raca=raca;
         this.set_Caracteristica(raca);
+        this.set_tipo("Cachorro");
     }
     public void Brincar(){
         System.out.println(nome+" esta brincando com o graveto");
