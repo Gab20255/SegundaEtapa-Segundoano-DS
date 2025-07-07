@@ -1,7 +1,7 @@
-package ProjetoInterface.Sub_Classes;
-import ProjetoInterface.Interfaces.InterfaceAnimalAquatico;
-import ProjetoInterface.Interfaces.InterfaceAnimalterrestre;
-import ProjetoInterface.Classes_de_Animais.Reptil;
+package Zoologico.src.ProjetoInterface.Sub_Classes;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimalAquatico;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimalterrestre;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.Reptil;
 public class Cobra extends Reptil implements InterfaceAnimalAquatico, InterfaceAnimalterrestre {
     protected int IntensidadedeVeneno;
     public Cobra(String nome, int idade, String som, String tipoDeEscama, int IntensidadedeVeneno){

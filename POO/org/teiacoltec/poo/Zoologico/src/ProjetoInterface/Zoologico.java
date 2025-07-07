@@ -1,10 +1,10 @@
-package ProjetoInterface;
+package Zoologico.src.ProjetoInterface;
 import java.io.Serializable;
 import java.util.*;
 
-import ProjetoInterface.Classes_de_Animais.Animal;
-import ProjetoInterface.Excecoes.AnimalNaoEncontradoException;
-import ProjetoInterface.Excecoes.JaExisteAnimalException;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.Animal;
+import Zoologico.src.ProjetoInterface.Excecoes.AnimalNaoEncontradoException;
+import Zoologico.src.ProjetoInterface.Excecoes.JaExisteAnimalException;
 public class Zoologico implements Serializable {
     final private  List<Animal> animais= new ArrayList<Animal>();
     private int id_zoo;

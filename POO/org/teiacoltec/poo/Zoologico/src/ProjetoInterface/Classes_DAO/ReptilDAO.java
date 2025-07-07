@@ -1,9 +1,8 @@
-package ProjetoInterface.Classes_DAO;
+package Zoologico.src.ProjetoInterface.Classes_DAO;
 
-import ProjetoInterface.Classes_de_Animais.Reptil;
-import ProjetoInterface.Conexao.Conexao;
-import ProjetoInterface.Conexao.FalhaConexaoException;
-
+import Zoologico.src.ProjetoInterface.Conexao.Conexao;
+import Zoologico.src.ProjetoInterface.Conexao.FalhaConexaoException;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.Reptil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

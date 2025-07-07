@@ -1,4 +1,4 @@
-package ProjetoInterface.Classes_de_Animais;
+package Zoologico.src.ProjetoInterface.Classes_de_Animais;
 
 public class Mamifero extends Animal {
     protected String tipoDePelo;

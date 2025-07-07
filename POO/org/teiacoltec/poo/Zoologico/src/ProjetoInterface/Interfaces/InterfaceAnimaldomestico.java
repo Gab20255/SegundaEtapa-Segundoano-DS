@@ -1,4 +1,4 @@
-package ProjetoInterface.Interfaces;
+package Zoologico.src.ProjetoInterface.Interfaces;
 
 public interface InterfaceAnimaldomestico {
     void levarParaPassear();

@@ -1,5 +1,5 @@
 
-package ProjetoInterface.Conexao;
+package Zoologico.src.ProjetoInterface.Conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

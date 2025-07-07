@@ -1,7 +1,7 @@
-package ProjetoInterface.Sub_Classes;
-import ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
-import ProjetoInterface.Interfaces.InterfaceAnimalterrestre;
-import ProjetoInterface.Classes_de_Animais.Mamifero;
+package Zoologico.src.ProjetoInterface.Sub_Classes;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimalterrestre;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.Mamifero;
 public class Gato extends Mamifero implements InterfaceAnimalterrestre, InterfaceAnimaldomestico {
     protected String olho;
     public Gato(String nome, int idade, String som, String tipoDePelo, String olho){

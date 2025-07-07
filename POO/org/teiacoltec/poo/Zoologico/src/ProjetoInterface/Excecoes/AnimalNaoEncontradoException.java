@@ -1,4 +1,4 @@
-package ProjetoInterface.Excecoes;
+package Zoologico.src.ProjetoInterface.Excecoes;
 
 
 public class AnimalNaoEncontradoException  extends Exception  {

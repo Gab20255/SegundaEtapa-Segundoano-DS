@@ -1,8 +1,8 @@
-package ProjetoInterface.Sub_Classes;
+package Zoologico.src.ProjetoInterface.Sub_Classes;
 
-import ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
-import ProjetoInterface.Interfaces.InterfaceAnimalterrestre;
-import ProjetoInterface.Classes_de_Animais.Mamifero;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimalterrestre;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.Mamifero;
 
 public class Cachorro extends Mamifero implements InterfaceAnimaldomestico, InterfaceAnimalterrestre{
     protected String raca;

@@ -1,8 +1,8 @@
-package ProjetoInterface.Classes_de_Animais;
+package Zoologico.src.ProjetoInterface.Classes_de_Animais;
 
 import java.io.Serializable;
 
-import ProjetoInterface.Zoologico;
+import Zoologico.src.ProjetoInterface.*;;
 
 public abstract class Animal implements Serializable {
     protected int id;  // novo atributo

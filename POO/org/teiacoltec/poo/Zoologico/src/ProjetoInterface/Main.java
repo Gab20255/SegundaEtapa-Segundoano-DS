@@ -1,12 +1,12 @@
-package ProjetoInterface;
+package Zoologico.src.ProjetoInterface;
 
 import java.util.List;
 import java.util.Random;
 
-import ProjetoInterface.Classes_de_Animais.*;
-import ProjetoInterface.Sub_Classes.*;
-import ProjetoInterface.Classes_DAO.*;
-import ProjetoInterface.Excecoes.*;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.*;
+import Zoologico.src.ProjetoInterface.Sub_Classes.*;
+import Zoologico.src.ProjetoInterface.Classes_DAO.*;
+import Zoologico.src.ProjetoInterface.Excecoes.*;
 
 public class Main {
     public static void main(String[] args) {

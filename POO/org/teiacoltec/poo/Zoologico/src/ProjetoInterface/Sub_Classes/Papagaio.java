@@ -1,10 +1,10 @@
-package ProjetoInterface.Sub_Classes;
-import ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
-import ProjetoInterface.Interfaces.InterfaceanimalAereo;
+package Zoologico.src.ProjetoInterface.Sub_Classes;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceAnimaldomestico;
+import Zoologico.src.ProjetoInterface.Interfaces.InterfaceanimalAereo;
 
 
 
-import ProjetoInterface.Classes_de_Animais.Ave;
+import Zoologico.src.ProjetoInterface.Classes_de_Animais.Ave;
 
 public class Papagaio extends Ave implements InterfaceAnimaldomestico, InterfaceanimalAereo {
     protected String Falarepetitiva;

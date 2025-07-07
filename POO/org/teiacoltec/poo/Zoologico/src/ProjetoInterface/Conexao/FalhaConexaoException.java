@@ -1,4 +1,4 @@
-package ProjetoInterface.Conexao;
+package Zoologico.src.ProjetoInterface.Conexao;
 
 public class FalhaConexaoException extends Exception {
 
