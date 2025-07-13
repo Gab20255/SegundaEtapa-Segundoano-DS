@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Atividade {
+    private static int proximoID = 1;
     protected int ID;
     protected String nome;
     protected Date inicio;
@@ -13,7 +14,7 @@ public class Atividade {
     private static ArrayList<Atividade> atividades =new ArrayList<>();
 
     public Atividade(int ID, String nome,Date inicio, Date fim, float valor){
-        this.ID=ID;
+        this.ID=proximoID++;
         this.nome=nome;
         this.inicio=inicio;
         this.fim=fim;
