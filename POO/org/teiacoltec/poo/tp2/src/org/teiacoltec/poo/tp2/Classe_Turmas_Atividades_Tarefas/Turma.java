@@ -1,4 +1,4 @@
-package org.teiacoltec.poo.tp2.Classe_Turmas_Atividades;
+package org.teiacoltec.poo.tp2.Classe_Turmas_Atividades_Tarefas;
 
 import java.util.ArrayList;
 import java.util.Date;
