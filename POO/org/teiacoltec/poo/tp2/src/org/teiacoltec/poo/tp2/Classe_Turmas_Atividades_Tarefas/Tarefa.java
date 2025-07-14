@@ -11,6 +11,15 @@ public class Tarefa {
     protected Aluno aluno;
     protected Atividade atividade;
     protected float nota;
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    protected Turma turma;
 
     public Tarefa(int ID, Aluno aluno, Atividade atividade, float nota){
         this.ID=ProximoIDT++;
@@ -85,5 +94,21 @@ public class Tarefa {
 
     public void setNota(float nota) {
         this.nota = nota;
+    }
+
+    public void obterInformacoes(Tarefa a){
+        int i=1;
+        String Informacoes=null;
+        Informacoes= "-----------------\n| Informações completas |\n-----------------"+"ID: "+a.getID()+"\n"+"\n"+"Nota: "+a.getNota()+"\n"+"-----------------";
+        System.out.println(Informacoes);
+        
+        for(Turma b: a.getTurma().getTurmas_filhas()){
+            System.out.println("Turma 0"+i+"\n");
+            b.obterInformacoes(b);
+            i++;
+        }
+        i=0;
+        System.out.println("Atividade 0"+i+"\n");
+        a.getAtividade().obterInformacoes(a.getAtividade());
     }
 }

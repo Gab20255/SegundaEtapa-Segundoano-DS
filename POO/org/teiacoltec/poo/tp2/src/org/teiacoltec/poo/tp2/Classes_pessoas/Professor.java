@@ -1,6 +1,6 @@
 package org.teiacoltec.poo.tp2.Classes_pessoas;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Professor extends Pessoa {
     protected String Matricula;

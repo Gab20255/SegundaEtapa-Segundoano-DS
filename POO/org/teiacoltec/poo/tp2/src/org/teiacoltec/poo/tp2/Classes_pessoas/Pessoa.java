@@ -1,6 +1,6 @@
 package org.teiacoltec.poo.tp2.Classes_pessoas;
 
-import java.sql.Date;
+import java.util.Date;
 
 public abstract class Pessoa{
     protected String CPF;
@@ -21,6 +21,12 @@ public abstract class Pessoa{
         String Informacoes=null;
         Informacoes= "-----------------\n| Informações gerais |\n-----------------"+"Cpf: "+getCPF()+"\n"+"Nome: "+getNome()+"\n"+"Email: "+getemail()+"\n"+"Endereco:: "+getendereco()+"\n"+"Data de nascimento: "+getnascimento()+"\n"+"-----------------";
         return Informacoes;
+    }
+
+    public void obterInformacoes(Pessoa a){
+        String Informacoes=null;
+        Informacoes= "-------------------------\n| Informações completas |\n-------------------------\n"+"Cpf: "+a.getCPF()+"\n"+"Nome: "+a.getNome()+"\n"+"Email: "+a.getemail()+"\n"+"Endereco:: "+a.getendereco()+"\n"+"Data de nascimento: "+a.getnascimento()+"\n"+"------------------------------------------------";
+        System.out.println(Informacoes);
     }
 
     public String getCPF() {

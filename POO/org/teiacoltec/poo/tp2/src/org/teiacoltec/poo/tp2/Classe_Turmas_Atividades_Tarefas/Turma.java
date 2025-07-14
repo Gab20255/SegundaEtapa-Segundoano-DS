@@ -20,6 +20,14 @@ public class Turma {
     protected ArrayList<Pessoa> participantes=new ArrayList<Pessoa>();
     protected Turma Turma_pai;
     protected ArrayList<Turma> turmas_filhas= new ArrayList<Turma>();
+    public ArrayList<Turma> getTurmas_filhas() {
+        return turmas_filhas;
+    }
+
+    public void setTurmas_filhas(ArrayList<Turma> turmas_filhas) {
+        this.turmas_filhas = turmas_filhas;
+    }
+
     protected ArrayList <Atividade> Atividades= new ArrayList<>();
 
     public Turma( String nome, String descricao, Date ini, Date f){
@@ -34,23 +42,22 @@ public class Turma {
         this.Turma_pai=null;
         todasAsTurmas.add(this);
     }
+    public Turma(Turma turmaPai, String nome, String descricao, Date ini, Date fim) {
+    this.ID = proximoID++;
+    this.nome = nome;
+    this.descricao = descricao;
+    this.inicio = ini;
+    this.fim = fim;
+    this.participantes = new ArrayList<>();
+    this.Atividades = new ArrayList<>();
+    this.turmas_filhas = new ArrayList<>();
+    this.Turma_pai = turmaPai;
+    todasAsTurmas.add(this);
 
-    public Turma(Turma turmaPai) {
-        this.ID = proximoID++;                         // Gera um novo ID único
-        this.nome = "Subturma de " + turmaPai.nome;    // Dá um nome padrão
-        this.descricao = "Subturma gerada";            // Descrição simples
-        this.inicio = new Date();                      // Define início como hoje
-        this.fim = new Date();                         // Define fim como hoje
-        this.participantes = new ArrayList<>();        // Lista de participantes vazia
-        this.turmas_filhas = new ArrayList<>();        // Lista de subturmas vazia
-        this.Atividades = new ArrayList<>();           // Lista de atividades vazia
-        this.Turma_pai = turmaPai;                     // Define a turma pai
-        todasAsTurmas.add(this);
-
-        if (turmaPai != null) {
-            turmaPai.associaSubturma(this);            // Adiciona esta turma como filha da pai
-        }
+    if (turmaPai != null) {
+        turmaPai.associaSubturma(this);
     }
+}
 
 
     public ArrayList<Pessoa> obtemListaParticipantes(){
@@ -74,8 +81,10 @@ public class Turma {
         return false;
     }
 
-    public void associaSubturma(Turma turma_a_ser_associada){
-        turmas_filhas.add(turma_a_ser_associada);
+    public void associaSubturma(Turma subturma){
+        if (subturma != null && !turmas_filhas.contains(subturma)) {
+        turmas_filhas.add(subturma);
+    }
     }
 
     public ArrayList<Professor> obtemListaProfessores(boolean completa){
@@ -267,5 +276,31 @@ public class Turma {
 
     public void setTurma_pai(Turma turma_pai) {
         Turma_pai = turma_pai;
+    }
+
+    public void obterInformacoes(Turma a){
+        String Informacoes=null;
+        Informacoes= "-----------------\n| Informações completas |\n-----------------"+"ID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"\n"+"Descrição: "+a.getDescricao()+"\n"+"Inicio:: "+a.getInicio()+"\n"+"Fim: "+a.getFim()+"\n"+"-----------------";
+        System.out.println(Informacoes);
+        System.out.println("-----------------\nAtividades-----------------\n");
+        int i=1;
+        for(Atividade b: a.obtemAtividadesDaTurma(true)){
+            System.out.println("Atividade 0"+i+"\n");
+            b.obterInformacoes(b);
+            i++;
+        }
+        i=0;
+        for(Pessoa b: a.obtemListaParticipantes()){
+            System.out.println("Pariticipante 0"+i+"\n");
+            b.obterInformacoes(b);
+            i++;
+        }
+        i=0;
+        for(Turma b: a.getTurmas_filhas()){
+            System.out.println("Turma 0"+i+"\n");
+            b.obterInformacoes(b);
+            i++;
+        }
+        i=0;
     }
 }

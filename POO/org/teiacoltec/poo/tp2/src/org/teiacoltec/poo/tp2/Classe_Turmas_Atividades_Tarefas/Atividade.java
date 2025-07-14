@@ -3,22 +3,33 @@ package org.teiacoltec.poo.tp2.Classe_Turmas_Atividades_Tarefas;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class Atividade {
     private static int proximoID = 1;
     protected int ID;
     protected String nome;
+    protected String Descricao;
     protected Date inicio;
     protected Date fim;
     protected float valor;
 
     private static ArrayList<Atividade> atividades =new ArrayList<>();
 
-    public Atividade(int ID, String nome,Date inicio, Date fim, float valor){
+    public Atividade(int ID, String nome,Date inicio, Date fim, float valor, String desc){
         this.ID=proximoID++;
         this.nome=nome;
         this.inicio=inicio;
         this.fim=fim;
         this.valor=valor;
+        this.Descricao= desc;
+    }
+
+    public String getDescricao() {
+        return Descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        Descricao = descricao;
     }
 
     public int getID() {
@@ -62,5 +73,10 @@ public class Atividade {
             }
         }
         return null;
+    }
+    public void obterInformacoes(Atividade a){
+        String Informacoes=null;
+        Informacoes= "-----------------\n| Informações completas |\n-----------------"+"ID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"Descrição"+a.getDescricao()+"\n"+"Valor: "+a.getValor()+"\n"+"Inicio: "+a.getInicio()+"\n"+"Fim:"+a.getFim()+"\n"+"-----------------";
+        System.out.println(Informacoes);
     }
 }
