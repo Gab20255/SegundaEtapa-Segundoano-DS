@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Pessoa;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Professor;
+import org.teiacoltec.poo.tp2.Excecoes.PessoaNaoEncontradaException;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Aluno;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Monitor;
 
@@ -68,8 +69,17 @@ public class Turma {
         participantes.add(a);
     }
 
-    public void removerParticipante(Pessoa a){
-        participantes.remove(a);
+    public void removerParticipante(Pessoa a) throws PessoaNaoEncontradaException{
+        try{
+            if(!this.participa(a)){
+                throw new PessoaNaoEncontradaException("Essa pessoa não participa da turma!\n");
+                
+            }
+            participantes.remove(a);
+        }
+        catch(PessoaNaoEncontradaException e){
+            System.out.println("Essa pessoa não participa da turma!\n");
+        }
     }
 
     public boolean participa(Pessoa a){

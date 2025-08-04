@@ -1,0 +1,46 @@
+Estrutura de Dados:
+
+- Estrutura de dados são formas de armazenamento de dados!
+
+- Tem estruturas de dados que se comportam de forma diferente das outras
+
+-São elas Listas, pilhas e filas
+
+Listas
+- Dados armazenados de forma sequencial, em estruturas chamadas nós(estruras compostas por dado/ponteiro) Sem alocação prévia.
+- pode ser dupla ou circular
+Operações:
+get()= retornar elemento na posição x
+insert(): insere um elemente em uma posição qualquer da lista
+remove(): remover a primeira ocorrencia de um elemento
+removeAt(): Remove o elemento qualquer em uma posição específica
+replace(): substitui um elemento pelo outro
+size(): tamanho
+isEmpty: retorna se a lista tá vazia ou não
+isFull: retorna se a lista tá cheia
+
+Pilhas
+
+- Apenas é o possível inserir elementos na ultima posição, e remover o ultimo elemento
+
+Operações:
+
+push( ) adicionar elemento
+pop() tirar elemento
+peek( ) retorna elemento que está no topo da pilha
+size()retorna o tamanho da pilha
+isEmpty: retorna se a lista tá vazia ou não
+isFull: retorna se a lista tá cheia
+
+Filas
+
+- Apenas é o possível inserir elementos na primeira posição, e remover o primeiro elemento
+
+Operações:
+
+enqueue( ) adicionar elemento
+dequeue() tirar elemento
+peek( ) retorna elemento que está no topo da pilha
+size()retorna o tamanho da pilha
+isEmpty: retorna se a lista tá vazia ou não
+isFull: retorna se a lista tá cheia
