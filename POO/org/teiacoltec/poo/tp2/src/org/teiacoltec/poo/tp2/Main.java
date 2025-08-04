@@ -1,12 +1,12 @@
 package org.teiacoltec.poo.tp2;
 import java.util.Date;
 import java.util.Calendar;
-
+import org.teiacoltec.poo.tp2.Classe_Turmas_Atividades_Tarefas.Tarefa;
 import org.teiacoltec.poo.tp2.Classe_Turmas_Atividades_Tarefas.Turma;
+import org.teiacoltec.poo.tp2.Classe_Turmas_Atividades_Tarefas.Atividade;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Aluno;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Professor;
 import org.teiacoltec.poo.tp2.Classes_pessoas.Monitor;
-import org.teiacoltec.poo.tp2.Classes_pessoas.Pessoa;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,19 +26,18 @@ public class Main {
         cal4.set(2000, Calendar.JULY, 15);
         Date nascimento4 = cal4.getTime();
         Monitor Monitor= new Monitor("17569856432", "Anakin", "Anakinodb@gmail.com", "Bairro São José",nascimento4 , "2018", "Automação Industrial");
-        Professor.obterInformacoes(Professor);
-        aluno1.obterInformacoes(aluno1);
-        aluno2.obterInformacoes(aluno2);
-        Monitor.obterInformacoes(Monitor);
         cal.set(2025, Calendar.FEBRUARY, 10);
         Date inicioTurma = cal.getTime();
         cal.set(2028, Calendar.DECEMBER, 1);
         Date fimTurma = cal.getTime();
         cal.set(2025, Calendar.FEBRUARY, 10);
         Date inicioAtividade = cal.getTime();
-
         cal.set(2025, Calendar.MARCH, 1);
         Date fimAtividade = cal.getTime();
+        cal.set(2025, Calendar.APRIL, 10);
+        Date inicioAtividade2 = cal.getTime();
+        cal.set(2025, Calendar.MAY, 1);
+        Date fimAtividade2 = cal.getTime();
         Turma turma = new Turma("106","NTI", inicioTurma, fimTurma);
         turma.adicionarParticipante(aluno2);
         turma.adicionarParticipante(aluno1);
@@ -50,7 +49,21 @@ public class Main {
         turma.associaSubturma(subturma2);
         subturma2.adicionarParticipante(aluno2);
         subturma1.adicionarParticipante(aluno1);
+        Atividade Trabalho_final= new Atividade("Trabalho final de programação", inicioAtividade, fimAtividade, 20.0f, "Construir um programa que simule o Ifood");
+        Atividade Banco_de_Dados= new Atividade("Projeto PHP", inicioAtividade2, fimAtividade2, 25.0f, "Criar um banco de Dados de uma Academia");
+        Atividade IP= new Atividade("Projeto C", inicioAtividade, fimAtividade, 15.0f, "Criar um mercado livre em C");
+        turma.associaAtividade(Trabalho_final);
+        subturma1.associaAtividade(Banco_de_Dados);
+        subturma2.associaAtividade(IP);
         turma.obterInformacoes(turma);
-
+        Tarefa tarefateste1= new Tarefa( aluno2, IP, 20.0f, turma);
+        Tarefa teste2= new Tarefa(aluno2, Trabalho_final, 0, subturma2);
+        Tarefa teste3= new Tarefa(aluno1, Banco_de_Dados, 25.0f, subturma1);
+        for(Tarefa b : tarefateste1.obtemTarefasDaPessoa(aluno2)){
+            if(b.getAluno().getNome()==aluno2.getNome()){
+                System.out.println("");
+            }
+        }
+        teste3.obterInformacoes(teste3);
     }
 }

@@ -6,24 +6,22 @@ import java.util.Date;
 
 public class Atividade {
     private static int proximoID = 1;
-    protected int ID;
-    protected String nome;
-    protected String Descricao;
-    protected Date inicio;
-    protected Date fim;
-    protected float valor;
+    private int ID;
+    private String nome;
+    private Date inicio;
+    private Date fim;
+    private float valor;
+    private String Descricao;
 
-    private static ArrayList<Atividade> atividades =new ArrayList<>();
-
-    public Atividade(int ID, String nome,Date inicio, Date fim, float valor, String desc){
-        this.ID=proximoID++;
-        this.nome=nome;
-        this.inicio=inicio;
-        this.fim=fim;
-        this.valor=valor;
-        this.Descricao= desc;
+    public Atividade(String nome, Date inicio, Date fim, float valor, String desc) {
+        this.ID = proximoID++;
+        this.nome = nome;
+        this.inicio = inicio;
+        this.fim = fim;
+        this.valor = valor;
+        this.Descricao = desc;
     }
-
+    private static ArrayList<Atividade> atividades =new ArrayList<>();
     public String getDescricao() {
         return Descricao;
     }
@@ -76,7 +74,7 @@ public class Atividade {
     }
     public void obterInformacoes(Atividade a){
         String Informacoes=null;
-        Informacoes= "-----------------\n| Informações completas |\n-----------------"+"ID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"Descrição"+a.getDescricao()+"\n"+"Valor: "+a.getValor()+"\n"+"Inicio: "+a.getInicio()+"\n"+"Fim:"+a.getFim()+"\n"+"-----------------";
+        Informacoes= "-------------------------\n| Informações completas |\n-------------------------"+"\nID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"\nDescrição: "+a.getDescricao()+"\n"+"Valor: "+a.getValor()+"\n"+"Inicio: "+a.getInicio()+"\n"+"Fim:"+a.getFim()+"\n"+"-------------------------------";
         System.out.println(Informacoes);
     }
 }

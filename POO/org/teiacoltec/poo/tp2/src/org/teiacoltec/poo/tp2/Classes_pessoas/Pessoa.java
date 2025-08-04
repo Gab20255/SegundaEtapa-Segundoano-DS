@@ -19,7 +19,7 @@ public abstract class Pessoa{
 
     public String obterInformacoes(){
         String Informacoes=null;
-        Informacoes= "-----------------\n| Informações gerais |\n-----------------"+"Cpf: "+getCPF()+"\n"+"Nome: "+getNome()+"\n"+"Email: "+getemail()+"\n"+"Endereco:: "+getendereco()+"\n"+"Data de nascimento: "+getnascimento()+"\n"+"-----------------";
+        Informacoes= "-------------------------\n| Informações gerais |\n-------------------------"+"Cpf: "+getCPF()+"\n"+"Nome: "+getNome()+"\n"+"Email: "+getemail()+"\n"+"Endereco:: "+getendereco()+"\n"+"Data de nascimento: "+getnascimento()+"\n"+"------------------------------------------------";
         return Informacoes;
     }
 

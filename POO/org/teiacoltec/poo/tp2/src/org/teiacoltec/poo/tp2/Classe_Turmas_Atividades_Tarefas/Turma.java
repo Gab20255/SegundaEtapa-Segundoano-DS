@@ -152,11 +152,11 @@ public class Turma {
         
         return lista_Monitores;
     }
-    void associaAtividade(Atividade a){
+    public void associaAtividade(Atividade a){
         Atividades.add(a);
     }
 
-    void desassociaAtividade(Atividade a){
+    public void desassociaAtividade(Atividade a){
         Atividades.remove(a);
     }
     public ArrayList<Atividade> obtemAtividadesDaTurma(boolean completa){
@@ -280,27 +280,49 @@ public class Turma {
 
     public void obterInformacoes(Turma a){
         String Informacoes=null;
-        Informacoes= "-----------------\n| Informações completas |\n-----------------"+"ID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"\n"+"Descrição: "+a.getDescricao()+"\n"+"Inicio:: "+a.getInicio()+"\n"+"Fim: "+a.getFim()+"\n"+"-----------------";
+        if(a.getTurma_pai()!=null){
+            Informacoes= "Turma Filha Requerida\n -------------------------\n| Informações completas |\n-------------------------\n"+"ID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"\n"+"Descrição: "+a.getDescricao()+"\n"+"Inicio:: "+a.getInicio()+"\n"+"Fim: "+a.getFim()+"\n"+"Turma Pai:"+a.getTurma_pai().getNome()+"\n------------------------------------------------\n";
         System.out.println(Informacoes);
-        System.out.println("-----------------\nAtividades-----------------\n");
+        }
+        else{
+        Informacoes= "Turma Requerida\n -------------------------\n| Informações completas |\n-------------------------\n"+"ID: "+a.getID()+"\n"+"Nome: "+a.getNome()+"\n"+"Descrição: "+a.getDescricao()+"\n"+"Inicio:: "+a.getInicio()+"\n"+"Fim: "+a.getFim()+"\n"+"------------------------------------------------\n";
+        System.out.println(Informacoes);
+        }
+        System.out.println("-----------------\nAtividades\n-----------------\n");
         int i=1;
         for(Atividade b: a.obtemAtividadesDaTurma(true)){
-            System.out.println("Atividade 0"+i+"\n");
+            System.out.println("Atividade "+String.format("%02d", i)+"\n");
             b.obterInformacoes(b);
             i++;
         }
-        i=0;
+        int al=1;
+        int m=1;
+        int p=1;
         for(Pessoa b: a.obtemListaParticipantes()){
-            System.out.println("Pariticipante 0"+i+"\n");
+            if(b instanceof Aluno){
+            System.out.println("Aluno "+String.format("%02d", al)+"\n");
+            al++;
+            }
+            if(b instanceof Professor){
+            System.out.println("Professor "+String.format("%02d", p)+"\n");
+                p++;
+            }
+            if(b instanceof Monitor){
+            System.out.println("Monitor "+String.format("%02d", m)+"\n");
+            m++;
+            }
             b.obterInformacoes(b);
-            i++;
+            
+            
         }
-        i=0;
+        i=1;
+        if(a.getTurmas_filhas()!=null){
         for(Turma b: a.getTurmas_filhas()){
-            System.out.println("Turma 0"+i+"\n");
+            System.out.println("SubTurmas "+String.format("%02d", i)+"\n");
             b.obterInformacoes(b);
             i++;
         }
-        i=0;
+    }
+        i=1;
     }
 }

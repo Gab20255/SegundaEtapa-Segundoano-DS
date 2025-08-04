@@ -21,11 +21,12 @@ public class Tarefa {
 
     protected Turma turma;
 
-    public Tarefa(int ID, Aluno aluno, Atividade atividade, float nota){
+    public Tarefa( Aluno aluno, Atividade atividade, float nota, Turma t){
         this.ID=ProximoIDT++;
         this.aluno=aluno;
         this.atividade= atividade;
         this.nota=nota;
+        this.turma=t;
         todasAsTarefas.add(this);
     }
 
@@ -99,7 +100,7 @@ public class Tarefa {
     public void obterInformacoes(Tarefa a){
         int i=1;
         String Informacoes=null;
-        Informacoes= "-----------------\n| Informações completas |\n-----------------"+"ID: "+a.getID()+"\n"+"\n"+"Nota: "+a.getNota()+"\n"+"-----------------";
+        Informacoes= "------------------------\n| Informações da tarefa |\n------------------------\n"+"ID: "+a.getID()+"\n"+"\n"+"Nota: "+a.getNota()+"\n"+"-----------------";
         System.out.println(Informacoes);
         
         for(Turma b: a.getTurma().getTurmas_filhas()){
@@ -107,8 +108,8 @@ public class Tarefa {
             b.obterInformacoes(b);
             i++;
         }
-        i=0;
-        System.out.println("Atividade 0"+i+"\n");
+        i=1;
+        System.out.println("Atividade\n");
         a.getAtividade().obterInformacoes(a.getAtividade());
     }
 }

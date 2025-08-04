@@ -1,0 +1,55 @@
+O que é Serialização?
+-Mecanismo capaz de transformar objtos em um formato que transmitem os atributos daquele objeto para um armazenamento externo a memória(arquivo binario).
+-Podemos ler e escrever nesse arquivo
+-Interface: java.io.Serializable
+- Escrever: ObjectOutputStream
+- Ler -> ObjectinputStream
+- Podemos escolher os atributos que vão ser armazenados, evitamos dados como senhas!(marcamos esses dados com transient)
+EXP:
+private transient int estoque
+- Se o filho vai ser serializado, o Pai precisa implementar Serializable também
+- Devemos definir uma chave de serialização também, para garantir a integridade e compatilhabilidade dos dados
+private static final long serialVersionUID= 1L
+
+OK, mas como de fato escrevemos no arquivo??
+
+FileOutputStream fileOut= new FileOutputStream("clase.ser"); Criamos o arquivo
+ObjectOutputStream out= new ObjectinputStream(fileOut); associamos a escrita com o arquivo
+out.write(classe); escrevemos o objeto
+out.close(); fechamos a escrita
+fileOut.close(); fechamos o arquivo
+
+E para ler??
+
+FileinputStream filein= new FileinputStream("Produto.ser"); selecionamos o arquivo
+ObjectinputStream in= new ObjectinputStream(Filein); associamos o conteúdo ao nosso objeto de leitura
+Produto p= (Produto ) in.readObject(); Lemos
+in.close();
+fileIn.close(); Fechamos
+
+- Cuidados:
+- É normal tomar uns java.io.NotSerializableException e
+java.lang.ClassNotFoundException
+porque não controlamos todas as classes, então para resolver é só colocar transient
+- Não serialize um objeto que referencia o outro ao mesmo tempo que esse outro referencia o objeto serializado! Isso causa um estouro de memória.
+
+Agora sobre Personalizar a a Serialização
+
+- Devemos sobreescrever os métodos WriteObject e readObject;
+- E ler manualmente os dados no fluxo de serialização
+
+// Excerto de uma classe Serializable
+private void writeObject(ObjectOutputStream out) throws IOException {
+// Serializa os atributos padrão
+out.defaultWriteObject();
+// Serializa um valor calculado
+out.writeInt(this.getValorCalculado());
+}
+
+private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+// Desserializa os atributos padrão
+in.defaultReadObject();
+// Desserializa o valor calculado
+int valorCalculado = in.readInt();
+// ... (reconstruir o estado do objeto)
+}
