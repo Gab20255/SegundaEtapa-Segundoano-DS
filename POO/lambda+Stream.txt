@@ -1,0 +1,86 @@
+- Lambdas e Streams são funções que permitem filtrar, reduzir e mapear as coleções de dados como Lista, map, hash map etc
+- Se antes usavamos o for, agora temos uma nova forma mais otimizada e simples de filtrar informações percorrendo coleções
+
+MAS ANTES ... CLASSES ANÔNIMAS
+
+- O que são classes anônimas?
+São objetos que advém de classes abstratas e interfaces, e que não queremos criar uma classe que extenda ou implemente.
+
+INTERFACES FUNCIONAIS
+
+- Interfaces que contém apenas um método abstrato
+
+Basicamente usamos a Lambda assim:
+
+Parametros -> (Tarefa) sendo essa tarefa, a tarefa da interface, o java cria uma classe anonima automaticamente
+
+3 INTERFACES FUNCIONAIS PRINCIPAIS
+
+Predicate:
+- Retorna um booleano
+- Se satisfaz uma condição
+
+@FunctionalInterface
+public interface Predicate<T> {
+
+boolean test(T t);
+}
+
+Predicate<String> começaComA = nome -> nome.startsWith("A");
+
+System.out.println(começaComA.test("Ana"));    // true
+System.out.println(começaComA.test("Bruno"));  // false
+
+
+
+Consumer:
+
+- Faz uma ação void
+@FunctionalInterface
+public interface Consumer<T> {
+
+void accept(T t);
+
+}
+Consumer<String> imprimir = nome -> System.out.println(nome);
+
+imprimir.accept("Ana"); // imprime "Ana"
+
+
+
+Function
+- Transforma um objeto em outro
+@FunctionalInterface
+public interface Function<T, R> {
+
+R apply(T t);
+
+}
+Function<String, Integer> tamanho = nome -> nome.length();
+
+System.out.println(tamanho.apply("Ana"));   // 3
+System.out.println(tamanho.apply("Bruno")); // 5
+
+listaAlunos.forEach(aluno -> System.out.println(aluno));
+
+STREAM
+
+- Uma forma declarativa de percorrer coleções e filtrar
+
+listaNomes.stream()
+          .filter(nome -> nome.startsWith("A"))
+          .forEach(System.out::println);
+
+Aqui:
+
+stream() → cria uma stream a partir da lista.
+
+filter(...) → mantém só os elementos que satisfazem a condição.
+
+forEach(...) → executa uma ação em cada elemento (nesse caso, imprimir).
+
+listaNomes.parallelStream()
+          .filter(nome -> nome.startsWith("A"))
+          .forEach(System.out::println);
+
+Faz a lógica de forma paralela
