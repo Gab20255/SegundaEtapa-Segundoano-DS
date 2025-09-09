@@ -1,5 +1,4 @@
 package org.teiacoltec.poo.tp2.classes;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
