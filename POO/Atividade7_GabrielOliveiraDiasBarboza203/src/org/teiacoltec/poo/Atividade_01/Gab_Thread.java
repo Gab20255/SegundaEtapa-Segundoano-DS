@@ -1,4 +1,4 @@
-package Atividade_4.org.teiacoltec.poo.Atividade_01;
+package org.teiacoltec.poo.Atividade_01;
 
 class Gab_Thread implements Runnable {
 

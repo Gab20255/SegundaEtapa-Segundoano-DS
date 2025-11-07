@@ -1,4 +1,4 @@
-package Atividade_4.org.teiacoltec.poo.Atividade_02;
+package org.teiacoltec.poo.Atividade_02;
 
 public class Main {
     public static void main(String[] args) {

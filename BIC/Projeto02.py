@@ -13,14 +13,14 @@ import csv
 #biblioteca de funções de cauculos matemáticos
 import numpy as np
 #Faz o texto ficar em minúsculo
-with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\Textos_bic.txt', 'r',  encoding='utf-8') as d:
+with open(r'C:\Users\gabri\OneDrive\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\Textos_bic.txt', 'r',  encoding='utf-8') as d:
     texto_bruto= d.read()
 texto_bruto= texto_bruto.lower()
 
 #Limpa o texto de caractéres especiais e deixa apenas números, letras e espaços, percorrendo em um for o texto e o filtrando com o join(junta as palavras filtradas com ' ')
 texto_tratado=''.join(i for i in texto_bruto if i.isalnum() or i.isspace())
 #escreve um arquivo com os textos tratados
-with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\Textos_bictratados2.txt', 'w',  encoding='utf-8') as d1:
+with open(r'C:\Users\gabri\OneDrive\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\Textos_bictratados2.txt', 'w',  encoding='utf-8') as d1:
     d1.write(texto_tratado)
 palavras= texto_tratado.split()
 palavras_unicas= list(set(palavras))
@@ -73,7 +73,7 @@ for i, j in itertools.combinations(range(total_textos), 2):
 # Diagonal principal = 1
 for i in range(total_textos):
     matriz_jaccard[i][i] = 1.0
-with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_jaccard.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
+with open(r'C:\Users\gabri\OneDrive\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_jaccard.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
     escritor = csv.writer(arquivo_csv)
 
     # Escrever o cabeçalho
@@ -82,30 +82,44 @@ with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2
     # Escrever cada linha da matriz com o nome do texto no início
     for nome, linha in zip(nome_textos, matriz_jaccard):
         escritor.writerow([nome] + [round(valor, 4) for valor in linha])
+import os
+import pandas as pd
+import numpy as np
+from scipy.spatial.distance import squareform
+from scipy.cluster.hierarchy import linkage, fcluster
 
-matriz_julio = np.zeros((total_textos, len(palavras_unicas_filtradas)), dtype=int)
-for j in range(len(lista_textos_filtrados)):
-    texto = lista_textos_filtrados[j]  # Pega o texto atual
-    for i in range(len(palavras_unicas_filtradas)):
-        if( palavras_unicas_filtradas[i] in texto ):
-            matriz_julio[j][i]=1
+output_dir = r"C:\Users\gabri\OneDrive\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\Cytoscape_Output"
+os.makedirs(output_dir, exist_ok=True)
 
-with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\matriz_julio.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
-    escritor = csv.writer(arquivo_csv)
+# -----------------------------
+# AGRUPAMENTO HIERÁRQUICO
+# -----------------------------
+distance_matrix = 1 - matriz_jaccard
+distance_condensed = squareform(distance_matrix, checks=False)
+Z = linkage(distance_condensed, method='average')
+clusters = fcluster(Z, t=0.3, criterion='distance')
 
-    # Escreve o cabeçalho com as palavras únicas
-    escritor.writerow(['Texto'] + palavras_unicas_filtradas)
+# -----------------------------
+# EXPORTAÇÃO PARA CYTOSCAPE
+# -----------------------------
+# Nós
+nodes_df = pd.DataFrame({
+    "id": nome_textos,
+    "cluster": clusters
+})
+nodes_df.to_csv(os.path.join(output_dir, "nodes_cytoscape.csv"), index=False)
 
-    # Escreve cada linha: índice ou nome do texto + presença das palavras
-    for i in range(total_textos):
-        escritor.writerow([nome_textos[i]] + list(matriz_julio[i]))
+# Arestas
+limiar_similaridade = 0.4
+edges = []
+for i in range(total_textos):
+    for j in range(i+1, total_textos):
+        if matriz_jaccard[i][j] >= limiar_similaridade:
+            edges.append([nome_textos[i], nome_textos[j], matriz_jaccard[i][j]])
 
-with open(r'C:\Users\gabri\OneDrive\Área de Trabalho\DesenvolvimentodeSoftware2\BIC\ARQUIVOS\palavras_filtradas.csv', 'w', newline='', encoding='utf-8') as arquivo_csv:
-    escritor = csv.writer(arquivo_csv)
+edges_df = pd.DataFrame(edges, columns=["source", "target", "weight"])
+edges_df.to_csv(os.path.join(output_dir, "edges_cytoscape.csv"), index=False)
 
-    # Escreve o cabeçalho
-    escritor.writerow(['Palavra', 'Contagem'])
-
-    # Escreve cada palavra e sua contagem
-    for linha in matriz_contagem_de_palavras_por_texto:
-        escritor.writerow(linha)
+print("Exportação concluída com sucesso!")
+print(f"Total de clusters: {len(set(clusters))}")
+print(f"Total de arestas exportadas: {len(edges)}")
