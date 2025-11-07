@@ -1,0 +1,5 @@
+Quantidade de Jogadores: 4
+Assassinos: 1
+Detetives: 0
+Anjos: 1
+Cidadaos: 2
